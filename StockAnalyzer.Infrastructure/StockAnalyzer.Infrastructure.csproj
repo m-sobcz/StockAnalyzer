@@ -5,7 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="OpenScraping" Version="1.4.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\StockAnalyzer.Core\StockAnalyzer.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Scraping\Config\DataFields.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scraping\Config\Income.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
