@@ -12,6 +12,8 @@ namespace StockAnalyzer.IntegrationTests.Scraping
             ConfigRepo configRepo = new ConfigRepo();
 
             Assert.Contains("Income", configRepo.Names());
+            Assert.Contains("Cashflow", configRepo.Names());
+            Assert.Contains("Balance", configRepo.Names());
         }
         [Fact]
         public void GettingNonExistentRepoThrowsException()
