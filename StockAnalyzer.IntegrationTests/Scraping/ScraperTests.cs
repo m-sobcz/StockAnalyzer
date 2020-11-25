@@ -23,9 +23,9 @@ namespace StockAnalyzer.IntegrationTests.Scraping
 
             string jsonConfig = configRepo.GetByName("Income");
             dynamic result = dataScraper.GetResults(jsonConfig);
-
+            var converted = JsonConvert.SerializeObject(result);
             Assert.Equal("2004", result.periods[0].ToString());
-            Assert.Equal("IncomeIntrestIncome", result.rows[0].label.ToString());
+            Assert.Equal("IntrestIncome", result.rows[0].label.ToString());
             Assert.Equal("1727312", result.rows[0].vals[0].ToString());
         }
         [Fact]
@@ -39,7 +39,7 @@ namespace StockAnalyzer.IntegrationTests.Scraping
             dynamic result = dataScraper.GetResults(jsonConfig);
 
             Assert.Equal("2004", result.periods[0].ToString());
-            Assert.Equal("BalanceCashWithCentralBank", result.rows[0].label.ToString());
+            Assert.Equal("CashWithCentralBank", result.rows[0].label.ToString());
             Assert.Equal("841114", result.rows[0].vals[0].ToString());
         }
         [Fact]
@@ -53,7 +53,7 @@ namespace StockAnalyzer.IntegrationTests.Scraping
             dynamic result = dataScraper.GetResults(jsonConfig);
 
             Assert.Equal("2004", result.periods[0].ToString());
-            Assert.Equal("CashflowOperatingCashflow", result.rows[0].label.ToString());
+            Assert.Equal("OperatingCashflow", result.rows[0].label.ToString());
             Assert.Equal("217139", result.rows[0].vals[0].ToString());
         }
     }
