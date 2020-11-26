@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 
 namespace StockAnalyzer.Infrastructure.Scraping
 {
-    public class ConfigRepo
+    public class Repository
     {
         readonly static string defaultConfigPath = Path.Combine("Scraping", "Config");
         readonly static string jsonExtension = ".json";
         readonly Dictionary<string, string> files = new Dictionary<string, string>();
         public IReadOnlyCollection<string> Names() => files.Keys.ToList().AsReadOnly();
 
-        public ConfigRepo() : this(defaultConfigPath)
+        public Repository() : this(defaultConfigPath)
         {
         }
-        public ConfigRepo(string folderPath)
+        public Repository(string folderPath)
         {
             string[] jsonPaths = Directory.GetFiles(folderPath, "*" + jsonExtension);
             foreach (var jsonPath in jsonPaths)
@@ -24,6 +25,10 @@ namespace StockAnalyzer.Infrastructure.Scraping
                 string fileName = Path.GetFileNameWithoutExtension(jsonPath);
                 files.Add(fileName, fileContent);
             }
+        }
+        public string GetByConfig(Config config)
+        {
+            return GetByName(config.ToString());
         }
         public string GetByName(string name)
         {

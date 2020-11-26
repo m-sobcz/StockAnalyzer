@@ -9,16 +9,25 @@ namespace StockAnalyzer.IntegrationTests.Scraping
         [Fact]
         public void DefaultRepoContainsEssentialConfigs()
         {
-            ConfigRepo configRepo = new ConfigRepo();
-
-            Assert.Contains("Income", configRepo.Names());
-            Assert.Contains("Cashflow", configRepo.Names());
-            Assert.Contains("Balance", configRepo.Names());
+            Repository configRepo = new Repository();
+            foreach (var config in Enum.GetValues(typeof(Config)))
+            {
+                Assert.Contains(config.ToString(), configRepo.Names());
+            }
+        }
+        [Fact]
+        public void GettingIncomeConfigReturnsSomeResult()
+        {
+            Repository configRepo = new Repository();
+            var config=configRepo.GetByConfig(Config.Income);
+            
+            Assert.NotNull(config);
+            Assert.True(config.Length > 0);
         }
         [Fact]
         public void GettingNonExistentRepoThrowsException()
         {
-            ConfigRepo configRepo = new ConfigRepo();
+            Repository configRepo = new Repository();
 
             var exception = Record.Exception(() => configRepo.GetByName("nonExistent"));
 

@@ -12,7 +12,7 @@ namespace StockAnalyzer.IntegrationTests.Scraping
     public class ScraperTests
     {
         readonly string testDataPath = "TestData";
-        readonly ConfigRepo configRepo=new ConfigRepo();
+        readonly Repository configRepo=new Repository();
 
         [Fact]
         public void ExtractionOfBHW_Income()
@@ -21,12 +21,12 @@ namespace StockAnalyzer.IntegrationTests.Scraping
             string html = File.ReadAllText(htmlPath);
             Scraper dataScraper = new Scraper(html);
 
-            string jsonConfig = configRepo.GetByName("Income");
-            dynamic result = dataScraper.GetResults(jsonConfig);
-            var converted = JsonConvert.SerializeObject(result);
-            Assert.Equal("2004", result.periods[0].ToString());
-            Assert.Equal("IntrestIncome", result.rows[0].label.ToString());
-            Assert.Equal("1727312", result.rows[0].vals[0].ToString());
+            string jsonConfig = configRepo.GetByConfig(Config.Income);
+            ScrapedData scrapedData = dataScraper.GetScrapedFinanceData(jsonConfig);
+
+            Assert.Equal("2004", scrapedData.Periods[0]);
+            Assert.Equal("IntrestIncome", scrapedData.Rows[0].Label);
+            Assert.Equal("1727312", scrapedData.Rows[0].Vals[0]);
         }
         [Fact]
         public void ExtractionOfBHW_Balance()
@@ -35,12 +35,12 @@ namespace StockAnalyzer.IntegrationTests.Scraping
             string html = File.ReadAllText(htmlPath);
             Scraper dataScraper = new Scraper(html);
 
-            string jsonConfig = configRepo.GetByName("Balance");
-            dynamic result = dataScraper.GetResults(jsonConfig);
+            string jsonConfig = configRepo.GetByConfig(Config.Balance);
+            ScrapedData scrapedData = dataScraper.GetScrapedFinanceData(jsonConfig);
 
-            Assert.Equal("2004", result.periods[0].ToString());
-            Assert.Equal("CashWithCentralBank", result.rows[0].label.ToString());
-            Assert.Equal("841114", result.rows[0].vals[0].ToString());
+            Assert.Equal("2004", scrapedData.Periods[0]);
+            Assert.Equal("CashWithCentralBank", scrapedData.Rows[0].Label);
+            Assert.Equal("841114", scrapedData.Rows[0].Vals[0]);
         }
         [Fact]
         public void ExtractionOfBHW_Cashflow()
@@ -49,12 +49,12 @@ namespace StockAnalyzer.IntegrationTests.Scraping
             string html = File.ReadAllText(htmlPath);
             Scraper dataScraper = new Scraper(html);
 
-            string jsonConfig = configRepo.GetByName("Cashflow");
-            dynamic result = dataScraper.GetResults(jsonConfig);
+            string jsonConfig = configRepo.GetByConfig(Config.Cashflow);
+            ScrapedData scrapedData = dataScraper.GetScrapedFinanceData(jsonConfig);
 
-            Assert.Equal("2004", result.periods[0].ToString());
-            Assert.Equal("OperatingCashflow", result.rows[0].label.ToString());
-            Assert.Equal("217139", result.rows[0].vals[0].ToString());
+            Assert.Equal("2004", scrapedData.Periods[0]);
+            Assert.Equal("OperatingCashflow", scrapedData.Rows[0].Label);
+            Assert.Equal("217139", scrapedData.Rows[0].Vals[0]);
         }
     }
 }
