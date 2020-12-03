@@ -14,13 +14,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Scraping\Config\Cashflow.json">
+    <None Update="Scrape\Config\Cashflow.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scraping\Config\Balance.json">
+    <None Update="Scrape\Config\Balance.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scraping\Config\Income.json">
+    <None Update="Scrape\Config\Income.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

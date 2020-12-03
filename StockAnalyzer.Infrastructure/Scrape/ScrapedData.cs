@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StockAnalyzer.Infrastructure.Scraping
+namespace StockAnalyzer.Infrastructure.Scrape
 {
     public class ScrapedData
     {

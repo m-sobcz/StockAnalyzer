@@ -1,18 +1,18 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using StockAnalyzer.Infrastructure.Scraping;
+using StockAnalyzer.Infrastructure.Scrape;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Xunit;
 
-namespace StockAnalyzer.IntegrationTests.Scraping
+namespace StockAnalyzer.IntegrationTests.Scrape
 {
     public class ScraperTests
     {
         readonly string testDataPath = "TestData";
-        readonly Repository configRepo=new Repository();
+        readonly Repository configRepo = new Repository();
 
         [Fact]
         public void ExtractionOfBHW_Income()

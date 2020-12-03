@@ -4,11 +4,11 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 
-namespace StockAnalyzer.Infrastructure.Scraping
+namespace StockAnalyzer.Infrastructure.Scrape
 {
     public class Repository
     {
-        readonly static string defaultConfigPath = Path.Combine("Scraping", "Config");
+        readonly static string defaultConfigPath = Path.Combine("Scrape", "Config");
         readonly static string jsonExtension = ".json";
         readonly Dictionary<string, string> files = new Dictionary<string, string>();
         public IReadOnlyCollection<string> Names() => files.Keys.ToList().AsReadOnly();

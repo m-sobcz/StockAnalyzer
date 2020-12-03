@@ -11,6 +11,11 @@ namespace StockAnalyzer.Core.FinanceAggregate
         public int? Quarter { get; set; }
         public bool IsYearly => !Quarter.HasValue;
         public bool IsQuarterly => Quarter.HasValue;
-
+        public Period(int year, int? quarter=null)
+        {
+            Year = year;
+            Quarter = quarter;
+        }
     }
+
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace StockAnalyzer.Infrastructure.Scraping
+namespace StockAnalyzer.Infrastructure.Scrape
 {
     class RegexValueRemoveTransform : ITransformationFromHtml
     {
@@ -65,7 +65,7 @@ namespace StockAnalyzer.Infrastructure.Scraping
                 regex = new Regex(regexPattern, RegexOptions.Compiled);
                 regexes.Add(regexPattern, regex);
             }
-            string outText= maxCount.HasValue ? regex.Replace(inText, string.Empty, maxCount.Value) : regex.Replace(inText, string.Empty);
+            string outText = maxCount.HasValue ? regex.Replace(inText, string.Empty, maxCount.Value) : regex.Replace(inText, string.Empty);
             return outText;
         }
     }

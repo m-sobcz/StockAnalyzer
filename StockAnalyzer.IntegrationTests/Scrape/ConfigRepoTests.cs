@@ -1,10 +1,10 @@
-﻿using StockAnalyzer.Infrastructure.Scraping;
+﻿using StockAnalyzer.Infrastructure.Scrape;
 using System;
 using Xunit;
 
-namespace StockAnalyzer.IntegrationTests.Scraping
+namespace StockAnalyzer.IntegrationTests.Scrape
 {
-   public class ConfigRepoTests
+    public class ConfigRepoTests
     {
         [Fact]
         public void DefaultRepoContainsEssentialConfigs()
@@ -19,8 +19,8 @@ namespace StockAnalyzer.IntegrationTests.Scraping
         public void GettingIncomeConfigReturnsSomeResult()
         {
             Repository configRepo = new Repository();
-            var config=configRepo.GetByConfig(Config.Income);
-            
+            var config = configRepo.GetByConfig(Config.Income);
+
             Assert.NotNull(config);
             Assert.True(config.Length > 0);
         }

@@ -3,7 +3,7 @@ using OpenScraping;
 using OpenScraping.Config;
 using System.Net;
 
-namespace StockAnalyzer.Infrastructure.Scraping
+namespace StockAnalyzer.Infrastructure.Scrape
 {
     public class Scraper
     {
@@ -15,11 +15,11 @@ namespace StockAnalyzer.Infrastructure.Scraping
             this.html = html;
         }
 
-        public ScrapedData GetScrapedFinanceData(string jsonConfig) 
+        public ScrapedData GetScrapedFinanceData(string jsonConfig)
         {
             this.jsonConfig = jsonConfig;
             JContainer container = GetScrapingResult();
-            ScrapedData scrapedObject =container.ToObject<ScrapedData>();
+            ScrapedData scrapedObject = container.ToObject<ScrapedData>();
             return scrapedObject;
         }
         JContainer GetScrapingResult()
