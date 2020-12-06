@@ -1,4 +1,4 @@
-﻿using StockAnalyzer.Core.FinanceAggregate;
+﻿using StockAnalyzer.Core.StatementAggregate;
 using System;
 using System.Collections.Generic;
 using System.Text;

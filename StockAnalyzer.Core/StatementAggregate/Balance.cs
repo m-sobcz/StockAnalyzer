@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StockAnalyzer.Core.FinanceAggregate
+namespace StockAnalyzer.Core.StatementAggregate
 {
     public class Balance : Finance
     {

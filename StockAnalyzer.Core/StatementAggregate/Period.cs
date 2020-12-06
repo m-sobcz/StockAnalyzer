@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace StockAnalyzer.Core.FinanceAggregate
+namespace StockAnalyzer.Core.StatementAggregate
 {
     public class Period : BaseEntity
     {

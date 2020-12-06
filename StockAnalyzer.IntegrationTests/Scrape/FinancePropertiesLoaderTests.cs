@@ -1,11 +1,11 @@
-﻿using StockAnalyzer.Core.FinanceAggregate;
+﻿using StockAnalyzer.Core.StatementAggregate;
 using StockAnalyzer.Infrastructure.Scrape;
 using StockAnalyzer.Infrastructure.Serialize;
 using System.Collections.Generic;
 using System.Reflection;
 using Xunit;
 
-namespace StockAnalyzer.IntegrationTests.Serialize
+namespace StockAnalyzer.IntegrationTests.Scrape
 {
     public class FinancePropertiesLoaderTests
     {

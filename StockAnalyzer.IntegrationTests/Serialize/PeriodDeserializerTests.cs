@@ -1,4 +1,4 @@
-﻿using StockAnalyzer.Core.FinanceAggregate;
+﻿using StockAnalyzer.Core.StatementAggregate;
 using StockAnalyzer.Infrastructure.Serialize;
 using Xunit;
 

@@ -1,11 +1,11 @@
-﻿using StockAnalyzer.Core.FinanceAggregate;
+﻿using StockAnalyzer.Core.StatementAggregate;
 using StockAnalyzer.Infrastructure.Scrape;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace StockAnalyzer.Infrastructure.Serialize
+namespace StockAnalyzer.Infrastructure.Scrape
 {
     public class FinancePropertiesLoader<T> where T : Finance
     {
