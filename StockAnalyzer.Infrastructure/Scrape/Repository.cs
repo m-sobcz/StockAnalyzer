@@ -26,7 +26,7 @@ namespace StockAnalyzer.Infrastructure.Scrape
                 files.Add(fileName, fileContent);
             }
         }
-        public string GetByConfig(Config config)
+        public string GetByConfig(ConfigType config)
         {
             return GetByName(config.ToString());
         }

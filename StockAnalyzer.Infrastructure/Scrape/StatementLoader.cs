@@ -1,4 +1,5 @@
 ﻿using StockAnalyzer.Core.StatementAggregate;
+using StockAnalyzer.Infrastructure.Scrape.Config;
 using StockAnalyzer.Infrastructure.Serialize;
 using System;
 using System.Collections.Generic;

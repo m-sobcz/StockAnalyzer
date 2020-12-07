@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using StockAnalyzer.Infrastructure.Scrape;
+using StockAnalyzer.Infrastructure.Scrape.Config;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,7 +22,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             string html = File.ReadAllText(htmlPath);
             Scraper dataScraper = new Scraper(html);
 
-            string jsonConfig = configRepo.GetByConfig(Config.Income);
+            string jsonConfig = configRepo.GetByConfig(ConfigType.Income);
             ScrapedData scrapedData = dataScraper.GetScrapedFinanceData(jsonConfig);
 
             Assert.Equal("2004", scrapedData.Periods[0]);
@@ -35,7 +36,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             string html = File.ReadAllText(htmlPath);
             Scraper dataScraper = new Scraper(html);
 
-            string jsonConfig = configRepo.GetByConfig(Config.Balance);
+            string jsonConfig = configRepo.GetByConfig(ConfigType.Balance);
             ScrapedData scrapedData = dataScraper.GetScrapedFinanceData(jsonConfig);
 
             Assert.Equal("2004", scrapedData.Periods[0]);
@@ -49,7 +50,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             string html = File.ReadAllText(htmlPath);
             Scraper dataScraper = new Scraper(html);
 
-            string jsonConfig = configRepo.GetByConfig(Config.Cashflow);
+            string jsonConfig = configRepo.GetByConfig(ConfigType.Cashflow);
             ScrapedData scrapedData = dataScraper.GetScrapedFinanceData(jsonConfig);
 
             Assert.Equal("2004", scrapedData.Periods[0]);

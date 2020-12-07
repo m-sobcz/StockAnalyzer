@@ -10,7 +10,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
         public void DefaultRepoContainsEssentialConfigs()
         {
             Repository configRepo = new Repository();
-            foreach (var config in Enum.GetValues(typeof(Config)))
+            foreach (var config in Enum.GetValues(typeof(ConfigType)))
             {
                 Assert.Contains(config.ToString(), configRepo.Names());
             }
@@ -19,7 +19,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
         public void GettingIncomeConfigReturnsSomeResult()
         {
             Repository configRepo = new Repository();
-            var config = configRepo.GetByConfig(Config.Income);
+            var config = configRepo.GetByConfig(ConfigType.Income);
 
             Assert.NotNull(config);
             Assert.True(config.Length > 0);

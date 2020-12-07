@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StockAnalyzer.Infrastructure.Scrape
 {
-    public enum Config
+    public enum ConfigType
     {
         Balance,
         Cashflow,
