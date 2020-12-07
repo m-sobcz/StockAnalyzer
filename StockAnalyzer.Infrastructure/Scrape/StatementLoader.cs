@@ -21,20 +21,26 @@ namespace StockAnalyzer.Infrastructure.Scrape
             this.balanceLoader = balanceLoader;
             this.cashflowLoader = cashflowLoader;
         }
-        public List<Statement> Load(ScrapedData scrapedData)
+        public List<Statement> Load(ScrapedData incomesData, ScrapedData balancesData, ScrapedData cashflowsData)
         {
             List<Statement> statements = new List<Statement>();
-            List<Period> periods = DeserializePeriods(scrapedData.Periods);
-            List<Income> incomes = incomeLoader.Load(scrapedData.Rows);
-            List<Balance> balances = balanceLoader.Load(scrapedData.Rows);
-            List<Cashflow> cashflows = cashflowLoader.Load(scrapedData.Rows);
-            for (int i = 0; i < periods.Count; i++)
+            List<Period> incomePeriods = DeserializePeriods(incomesData.Periods);
+            List<Period> balancePeriods = DeserializePeriods(balancesData.Periods);
+            List<Period> cashflowPeriods = DeserializePeriods(cashflowsData.Periods);
+            
+            List<Income> incomes = incomeLoader.Load(incomesData.Rows);
+            List<Balance> balances = balanceLoader.Load(balancesData.Rows);
+            List<Cashflow> cashflows = cashflowLoader.Load(cashflowsData.Rows);
+
+            int periodsCount = Math.Min(incomePeriods.Count, Math.Min(balancePeriods.Count, cashflowPeriods.Count));
+            for (int i = 0; i < periodsCount; i++)
             {
-                if (periods[i] != null) 
+                Period cohesivePeriod = GetCohesivePeriod(incomePeriods[i], balancePeriods[i], cashflowPeriods[i]);
+                if (cohesivePeriod != null)
                 {
                     Statement statement = new Statement()
                     {
-                        Period = periods[i],
+                        Period = cohesivePeriod,
                         Balance = balances[i],
                         Cashflow = cashflows[i],
                         Income = incomes[i]
@@ -44,6 +50,12 @@ namespace StockAnalyzer.Infrastructure.Scrape
             }
             return statements;
         }
+        Period GetCohesivePeriod(Period p1, Period p2, Period p3)
+        {
+            if (p1 != null && p1.Equals(p2) && p2.Equals(p3)) return p1;
+            else return null;
+        }
+
 
         List<Period> DeserializePeriods(List<string> serializedPeriods)
         {
@@ -51,7 +63,7 @@ namespace StockAnalyzer.Infrastructure.Scrape
             foreach (var serialized in serializedPeriods)
             {
                 Period period = periodDeserializer.Deserialize(serialized);
-                    periods.Add(period);
+                periods.Add(period);
             }
             return periods;
         }
