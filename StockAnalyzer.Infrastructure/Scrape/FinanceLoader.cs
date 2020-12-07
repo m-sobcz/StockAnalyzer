@@ -7,21 +7,34 @@ using System.Reflection;
 
 namespace StockAnalyzer.Infrastructure.Scrape
 {
-    public class FinancePropertiesLoader<T> where T : Finance
+    public class FinanceLoader<T> : IScrapedLoader<T> where T : Finance, new() 
     {
         readonly HashSet<string> propertiesToFill;
-        public FinancePropertiesLoader()
+
+        public FinanceLoader()
         {
             propertiesToFill = GetDecimalPropertiesToFill(typeof(T));
         }
-        public void LoadFinancesWithData(List<T> finances, ScrapedData scrapedData) 
+
+        public List<T> Load(List<ScrapedData.Row> dataRows) 
         {
-            foreach (ScrapedData.Row row in scrapedData.Rows)
+            List<T> finances = CreateFinances(dataRows.Count);
+            foreach (ScrapedData.Row row in dataRows)
             {
-                FillFinancesWithDataRow(finances, row);
+                SetFinancesPropertiesWithDataRow(finances, row);
             }
+            return finances;
         }
-        void FillFinancesWithDataRow(List<T> finances, ScrapedData.Row row)
+        List<T> CreateFinances(int count) 
+        {
+            List<T> finances = new List<T>();
+            for (int i = 0; i < count; i++)
+            {
+                finances.Add(new T());
+            }
+            return finances;
+        }
+        void SetFinancesPropertiesWithDataRow(List<T> finances, ScrapedData.Row row)
         {
             if (propertiesToFill.Contains(row.Label))
             {
@@ -40,5 +53,7 @@ namespace StockAnalyzer.Infrastructure.Scrape
             HashSet<string> propertiesNames = new HashSet<string>(runtimeProperties.Select(x => x.Name));
             return propertiesNames;
         }
+
+        
     }
 }

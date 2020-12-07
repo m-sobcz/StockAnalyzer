@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace StockAnalyzer.Infrastructure.Serialize
 {
-    public class PeriodDeserializer
+    public class PeriodDeserializer : IDeserializer<Period>
     {
         static Regex periodRegex;
         readonly string yearGroupName = "year";
