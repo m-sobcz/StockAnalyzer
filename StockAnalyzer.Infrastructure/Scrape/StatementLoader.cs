@@ -10,41 +10,23 @@ namespace StockAnalyzer.Infrastructure.Scrape
 {
     public class StatementLoader
     {
-        readonly IScrapedLoader<Income> incomeLoader;
-        readonly IScrapedLoader<Balance> balanceLoader;
-        readonly IScrapedLoader<Cashflow> cashflowLoader;
-        readonly IDeserializer<Period> periodDeserializer;
-        public StatementLoader(IDeserializer<Period> periodDeserializer, IScrapedLoader<Income> incomeLoader,
-            IScrapedLoader<Balance> balanceLoader, IScrapedLoader<Cashflow> cashflowLoader)
+        public List<Statement> Load(FinancesWithPeriods<Income> income,
+            FinancesWithPeriods<Balance> balance,
+            FinancesWithPeriods<Cashflow> cashflow)
         {
-            this.periodDeserializer = periodDeserializer;
-            this.incomeLoader = incomeLoader;
-            this.balanceLoader = balanceLoader;
-            this.cashflowLoader = cashflowLoader;
-        }
-        public List<Statement> Load(ScrapedData incomesData, ScrapedData balancesData, ScrapedData cashflowsData)
-        {
-            List<Statement> statements = new List<Statement>();
-            List<Period> incomePeriods = DeserializePeriods(incomesData.Periods);
-            List<Period> balancePeriods = DeserializePeriods(balancesData.Periods);
-            List<Period> cashflowPeriods = DeserializePeriods(cashflowsData.Periods);
-            
-            List<Income> incomes = incomeLoader.Load(incomesData.Rows);
-            List<Balance> balances = balanceLoader.Load(balancesData.Rows);
-            List<Cashflow> cashflows = cashflowLoader.Load(cashflowsData.Rows);
-
-            int periodsCount = Math.Min(incomePeriods.Count, Math.Min(balancePeriods.Count, cashflowPeriods.Count));
+            List<Statement> statements = new List<Statement>();            
+            int periodsCount = Math.Min(income.Periods.Count, Math.Min(balance.Periods.Count, cashflow.Periods.Count));
             for (int i = 0; i < periodsCount; i++)
             {
-                Period cohesivePeriod = GetCohesivePeriod(incomePeriods[i], balancePeriods[i], cashflowPeriods[i]);
+                Period cohesivePeriod = GetCohesivePeriod(income.Periods[i], balance.Periods[i], cashflow.Periods[i]);
                 if (cohesivePeriod != null)
                 {
                     Statement statement = new Statement()
                     {
                         Period = cohesivePeriod,
-                        Balance = balances[i],
-                        Cashflow = cashflows[i],
-                        Income = incomes[i]
+                        Balance = balance.Finances[i],
+                        Cashflow = cashflow.Finances[i],
+                        Income = income.Finances[i]
                     };
                     statements.Add(statement);
                 }
@@ -55,18 +37,6 @@ namespace StockAnalyzer.Infrastructure.Scrape
         {
             if (p1 != null && p1.Equals(p2) && p2.Equals(p3)) return p1;
             else return null;
-        }
-
-
-        List<Period> DeserializePeriods(List<string> serializedPeriods)
-        {
-            List<Period> periods = new List<Period>();
-            foreach (var serialized in serializedPeriods)
-            {
-                Period period = periodDeserializer.Deserialize(serialized);
-                periods.Add(period);
-            }
-            return periods;
         }
 
     }

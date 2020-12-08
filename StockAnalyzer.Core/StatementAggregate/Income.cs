@@ -21,7 +21,7 @@ namespace StockAnalyzer.Core.StatementAggregate
         public decimal NetOtherOperatingCosts { get; set; }
         public decimal NetoperatingProfit { get; set; }
         public decimal RelatedIncome { get; set; }
-        public decimal BeforTaxProfit { get; set; }
+        public decimal BeforeTaxProfit { get; set; }
         public decimal DiscontinuedProfit { get; set; }
         public decimal NetProfit { get; set; }
         public decimal ShareholderNetProfit { get; set; }
