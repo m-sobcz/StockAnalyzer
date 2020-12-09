@@ -1,7 +1,7 @@
 using Moq;
 using StockAnalyzer.Core.StatementAggregate;
 using StockAnalyzer.Infrastructure.Scrape;
-using StockAnalyzer.Infrastructure.Scrape.Config;
+using StockAnalyzer.Infrastructure.Scrape.Data;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -29,11 +29,11 @@ namespace StockAnalyzer.UnitTests.Scrape
         {
             // Arrange
             var financeLoader = this.CreateFinanceLoader();
-            List<ScrapedData.Row> dataRows=new List<ScrapedData.Row>
+            List<FinanceData.Row> dataRows=new List<FinanceData.Row>
             {
-                new ScrapedData.Row() { Description = "desc1", Label = "InterestIncome", Vals = new List<string>() { "100", "200", "300" } },
-                new ScrapedData.Row() { Description = "desc2", Label = "EBITDA", Vals = new List<string>() { "123", "456", "789" } },
-                new ScrapedData.Row() { Description = "desc3", Label = "DiscontinuedProfit", Vals = new List<string>() { "111", "222", "333" } }
+                new FinanceData.Row() { Description = "desc1", Label = "InterestIncome", Vals = new List<string>() { "100", "200", "300" } },
+                new FinanceData.Row() { Description = "desc2", Label = "EBITDA", Vals = new List<string>() { "123", "456", "789" } },
+                new FinanceData.Row() { Description = "desc3", Label = "DiscontinuedProfit", Vals = new List<string>() { "111", "222", "333" } }
             };
 
             // Act

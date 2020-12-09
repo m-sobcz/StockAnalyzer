@@ -1,5 +1,5 @@
 ﻿using StockAnalyzer.Core.StatementAggregate;
-using StockAnalyzer.Infrastructure.Scrape.Config;
+using StockAnalyzer.Infrastructure.Scrape.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +16,10 @@ namespace StockAnalyzer.Infrastructure.Scrape
             propertiesToFill = GetDecimalPropertiesToFill(typeof(T));
         }
 
-        public List<T> Load(List<ScrapedData.Row> dataRows) 
+        public List<T> Load(List<FinanceData.Row> dataRows) 
         {
             List<T> finances = CreateFinances(dataRows.Count);
-            foreach (ScrapedData.Row row in dataRows)
+            foreach (FinanceData.Row row in dataRows)
             {
                 SetFinancesPropertiesWithDataRow(finances, row);
             }
@@ -34,7 +34,7 @@ namespace StockAnalyzer.Infrastructure.Scrape
             }
             return finances;
         }
-        void SetFinancesPropertiesWithDataRow(List<T> finances, ScrapedData.Row row)
+        void SetFinancesPropertiesWithDataRow(List<T> finances, FinanceData.Row row)
         {
             if (propertiesToFill.Contains(row.Label))
             {

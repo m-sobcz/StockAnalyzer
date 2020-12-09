@@ -1,10 +1,6 @@
 ﻿using StockAnalyzer.Core.StatementAggregate;
-using StockAnalyzer.Infrastructure.Scrape.Config;
-using StockAnalyzer.Infrastructure.Serialize;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace StockAnalyzer.Infrastructure.Scrape
 {

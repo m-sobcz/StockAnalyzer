@@ -28,7 +28,7 @@ namespace StockAnalyzer.UnitTests.Scrape
             var result = repository.Names();
 
             // Assert
-            foreach (var config in Enum.GetValues(typeof(ConfigType)))
+            foreach (var config in Enum.GetValues(typeof(ScrapeConfig)))
             {
                 Assert.Contains(config.ToString(), result);
             }
@@ -36,10 +36,10 @@ namespace StockAnalyzer.UnitTests.Scrape
         }
 
         [Theory()]
-        [InlineData(ConfigType.Income)]
-        [InlineData(ConfigType.Balance)]
-        [InlineData(ConfigType.Cashflow)]
-        public void GetByConfig_WithAllBaseConfigs_ReturnsNonNull(ConfigType config)
+        [InlineData(ScrapeConfig.Income)]
+        [InlineData(ScrapeConfig.Balance)]
+        [InlineData(ScrapeConfig.Cashflow)]
+        public void GetByConfig_WithAllBaseConfigs_ReturnsNonNull(ScrapeConfig config)
         {
             // Arrange
             var repository = this.CreateRepository();

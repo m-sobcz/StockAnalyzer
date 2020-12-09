@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StockAnalyzer.Infrastructure.Scrape.Config
+namespace StockAnalyzer.Infrastructure.Scrape.Data
 {
-    public class ScrapedData
+    public class FinanceData
     {
         public List<string> Periods { get; set; }
         public List<Row> Rows { get; set; }

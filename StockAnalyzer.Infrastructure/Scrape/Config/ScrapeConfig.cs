@@ -4,10 +4,11 @@ using System.Text;
 
 namespace StockAnalyzer.Infrastructure.Scrape
 {
-    public enum ConfigType
+    public enum ScrapeConfig
     {
         Balance,
         Cashflow,
-        Income
+        Income,
+        StockNames
     }
 }

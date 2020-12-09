@@ -1,26 +1,25 @@
 ﻿using Newtonsoft.Json.Linq;
 using OpenScraping;
 using OpenScraping.Config;
-using StockAnalyzer.Infrastructure.Scrape.Config;
 using System.Net;
 
 namespace StockAnalyzer.Infrastructure.Scrape
 {
-    public class Scraper
+    public class Scraper<T>
     {
-        readonly string html;
+        string html;
         string jsonConfig;
 
-        public Scraper(string html)
-        {
-            this.html = html;
-        }
-
-        public ScrapedData GetScrapedFinanceData(string jsonConfig)
+        public Scraper(string jsonConfig)
         {
             this.jsonConfig = jsonConfig;
+        }
+
+        public T Scrape(string html)
+        {
+            this.html = html;
             JContainer container = GetScrapingResult();
-            ScrapedData scrapedObject = container.ToObject<ScrapedData>();
+            T scrapedObject = container.ToObject<T>();
             return scrapedObject;
         }
         JContainer GetScrapingResult()
