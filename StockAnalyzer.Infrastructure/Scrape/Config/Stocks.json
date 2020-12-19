@@ -1,0 +1,35 @@
+{
+  "rows": {
+    "_xpath": "//tr",
+    "combinedName": ".//td//a[contains(@class,'wname')]",
+    "quotationLink": ".//td//a[contains(@class,'wname')]//@href",
+    "time": ".//td//time//@datetime",
+    "actualPrice": ".//td//span[@class='q_ch_act']",
+    "openingPrice": ".//td//span[@class='q_ch_pkt cminus']",
+    "minPrice": ".//td//span[@class='q_ch_min']",
+    "maxPrice": ".//td//span[@class='q_ch_max']",
+    "volume": {
+      "_xpath": ".//td//span[@class='q_ch_vol']",
+      "_transformations": [
+        {
+          "_type": "RegexValueRemoveTransform",
+          "_regex": "\\s"
+        }
+      ]
+    },
+    "turnover": {
+      "_xpath": ".//td//span[@class='q_ch_mc']",
+      "_transformations": [
+        {
+          "_type": "RegexValueRemoveTransform",
+          "_regex": "\\s"
+        }
+      ]
+    }
+  }
+}
+
+
+
+
+    

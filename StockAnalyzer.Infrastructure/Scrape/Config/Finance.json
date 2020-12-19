@@ -1,0 +1,32 @@
+{
+  "periods": {
+    "_xpath": "//th[contains(@class,'thq')]/text()[1]",
+    "_transformations": [
+      "TrimTransformation"
+    ]
+  },
+  "rows": {
+    "_xpath": "//tr",
+    "label": {
+      "_xpath": ".//@data-field",
+      "_transformations": [
+        {
+          "_type": "RegexValueRemoveTransform",
+          "_regex": "[A-Z][a-z]*",
+          "_maxCount": "1"
+        }
+      ]
+    },
+    "description": ".//td[@class='f']//a",
+    "vals": {
+      "_xpath": ".//td[contains(@class, 'h')]//span[@class='value']//span//span",
+      "_transformations": [
+        {
+          "_type": "RegexValueRemoveTransform",
+          "_regex": "\\s"
+        }
+      ]
+    }
+  }
+
+}

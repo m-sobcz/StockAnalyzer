@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using OpenScraping;
 using OpenScraping.Config;
+using System;
 using System.Net;
 
 namespace StockAnalyzer.Infrastructure.Scrape

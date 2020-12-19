@@ -1,7 +1,7 @@
 using Moq;
 using StockAnalyzer.Core.StatementAggregate;
-using StockAnalyzer.Infrastructure.Scrape;
 using StockAnalyzer.Infrastructure.Scrape.Data;
+using StockAnalyzer.Infrastructure.Scrape.Mapping;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -21,7 +21,7 @@ namespace StockAnalyzer.UnitTests.Scrape
 
         private FinanceLoader<Income> CreateFinanceLoader()
         {
-            return new FinanceLoader<Income>();
+            return new FinanceLoader<Income>(() => new Income());
         }
 
         [Fact]

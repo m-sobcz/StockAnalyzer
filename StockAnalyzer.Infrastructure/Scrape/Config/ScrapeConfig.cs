@@ -9,6 +9,7 @@ namespace StockAnalyzer.Infrastructure.Scrape
         Balance,
         Cashflow,
         Income,
-        StockNames
+        Finance,
+        Stocks
     }
 }
