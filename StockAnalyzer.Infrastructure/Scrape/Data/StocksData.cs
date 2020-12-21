@@ -11,7 +11,7 @@ namespace StockAnalyzer.Infrastructure.Scrape.Data
         {
             public string CombinedName { get; set; }
             public string QuotationLink { get; set; }
-            public string Time { get; set; }
+            public string UpdateTime { get; set; }
             public string ActualPrice { get; set; }
             public string OpeningPrice { get; set; }
             public string MinPrice { get; set; }

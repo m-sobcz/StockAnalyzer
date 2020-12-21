@@ -88,7 +88,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             Assert.Equal("https://www.biznesradar.pl/notowania/06N", firstFilledResult.QuotationLink);
             Assert.Equal("1.50", firstFilledResult.ActualPrice);
             Assert.Equal("66494", firstFilledResult.Turnover);
-            Assert.Equal("2020-12-09T17:00:00+0100", firstFilledResult.Time);    
+            Assert.Equal("2020-12-09T17:00:00+0100", firstFilledResult.UpdateTime);    
         }
     }
 }

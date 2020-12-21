@@ -3,7 +3,7 @@
     "_xpath": "//tr",
     "combinedName": ".//td//a[contains(@class,'wname')]",
     "quotationLink": ".//td//a[contains(@class,'wname')]//@href",
-    "time": ".//td//time//@datetime",
+    "updateTime": ".//td//time//@datetime",
     "actualPrice": ".//td//span[@class='q_ch_act']",
     "openingPrice": ".//td//span[@class='q_ch_pkt cminus']",
     "minPrice": ".//td//span[@class='q_ch_min']",

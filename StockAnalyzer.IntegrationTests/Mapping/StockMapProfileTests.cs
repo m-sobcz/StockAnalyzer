@@ -27,12 +27,14 @@ namespace StockAnalyzer.IntegrationTests.Mapping
             {
                 new StocksData.Row()
             {
-                CombinedName="06N (06MAGNA)"
+                CombinedName="06N (06MAGNA)",
+                UpdateTime="2020-12-21T16:14:08+0100"
                 },
                 new Stock()
                 {
                     Name="06MAGNA",
-                    Ticker="06N"
+                    Ticker="06N",
+                    UpdateTime=new DateTimeOffset(2020,12,21,16,14,8,0,TimeSpan.FromMinutes(60))
                 }
             },
             {
@@ -62,6 +64,7 @@ namespace StockAnalyzer.IntegrationTests.Mapping
             var result = mapper.Map<StocksData.Row, Stock>(row);
             CompareLogic compareLogic = new CompareLogic();
             var comparision = compareLogic.Compare(expected, result);
+            var comp2 = compareLogic.Compare(expected.UpdateTime, result.UpdateTime);
 
             // Assert
             Assert.True(comparision.AreEqual);

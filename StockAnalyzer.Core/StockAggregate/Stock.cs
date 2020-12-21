@@ -14,6 +14,7 @@ namespace StockAnalyzer.Core.StockAggregate
         public decimal MaxPrice { get; set; }
         public decimal Volume { get; set; }
         public decimal Turnover { get; set; }
+        public DateTimeOffset UpdateTime { get; set; }
 
         private readonly List<StockIndex> indexes = new List<StockIndex>();
         public IReadOnlyCollection<StockIndex> Indexes => indexes.AsReadOnly();
