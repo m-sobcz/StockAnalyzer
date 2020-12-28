@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StockAnalyzer.Core.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -18,6 +19,15 @@ namespace StockAnalyzer.Core.StockAggregate
 
         private readonly List<StockIndex> indexes = new List<StockIndex>();
         public IReadOnlyCollection<StockIndex> Indexes => indexes.AsReadOnly();
+        public Stock()
+        {
+        }
+        public Stock(long id, string name, string ticker)
+        {
+            Id = id;
+            Name = name;
+            Ticker = ticker;
+        }
 
         public void AddIndex(StockIndex stockIndex)
         {

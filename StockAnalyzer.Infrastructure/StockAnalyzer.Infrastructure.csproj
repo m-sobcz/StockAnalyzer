@@ -15,19 +15,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Scrape\Config\Finance.json">
+    <None Update="Scrape\OpenScrapingDataExtractor\Finance.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scrape\Config\Stocks.json">
+    <None Update="Scrape\OpenScrapingDataExtractor\Stocks.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scrape\Config\Cashflow.json">
+    <None Update="Scrape\OpenScrapingDataExtractor\Cashflow.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scrape\Config\Balance.json">
+    <None Update="Scrape\OpenScrapingDataExtractor\Balance.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scrape\Config\Income.json">
+    <None Update="Scrape\OpenScrapingDataExtractor\Income.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -2,20 +2,21 @@
 using Newtonsoft.Json.Linq;
 using StockAnalyzer.Core.StatementAggregate;
 using StockAnalyzer.Infrastructure.Scrape;
-using StockAnalyzer.Infrastructure.Scrape.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Xunit;
 using System.Linq;
+using StockAnalyzer.Infrastructure.Scrape.RawData;
+using StockAnalyzer.Infrastructure.Scrape.Scraper;
 
 namespace StockAnalyzer.IntegrationTests.Scrape
 {
     public class ScrapingAllConfigRepoData
     {
         readonly string testDataPath = "TestData";
-        readonly Repository configRepo = new Repository();
+        readonly ConfigRepository configRepo = new ConfigRepository();
 
         [Fact]
         public void Scrape_GetIncome_ScrapsCorrect()
@@ -27,7 +28,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             Scraper<FinanceData> dataScraper = new Scraper<FinanceData>(jsonConfig);
 
             // Act
-            FinanceData scrapedData = dataScraper.Scrape(html);
+            FinanceData scrapedData = dataScraper.Deserialize(html);
 
             // Assert
             Assert.Equal("2004", scrapedData.Periods[0]);
@@ -45,7 +46,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
 
 
             // Act
-            FinanceData scrapedData = dataScraper.Scrape(html);
+            FinanceData scrapedData = dataScraper.Deserialize(html);
 
             // Assert
             Assert.Equal("2004", scrapedData.Periods[0]);
@@ -62,7 +63,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             Scraper<FinanceData> dataScraper = new Scraper<FinanceData>(jsonConfig);
 
             // Act
-            FinanceData scrapedData = dataScraper.Scrape(html);
+            FinanceData scrapedData = dataScraper.Deserialize(html);
 
             // Assert
             Assert.Equal("2004", scrapedData.Periods[0]);
@@ -76,10 +77,10 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             string htmlPath = Path.Combine(testDataPath, "GPW_stocks.html");
             string html = File.ReadAllText(htmlPath);
             string jsonConfig = configRepo.GetByConfig(ScrapeConfig.Stocks);
-            Scraper<StocksData> dataScraper = new Scraper<StocksData>(jsonConfig);
+            Scraper<TRawData> dataScraper = new Scraper<TRawData>(jsonConfig);
 
             // Act
-            StocksData scrapedData = dataScraper.Scrape(html);
+            TRawData scrapedData = dataScraper.Deserialize(html);
             var firstFilledResult= scrapedData.Rows.First(x => x.CombinedName != null);
 
             // Assert

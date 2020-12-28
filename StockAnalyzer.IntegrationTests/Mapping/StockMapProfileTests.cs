@@ -2,8 +2,8 @@ using AutoMapper;
 using KellermanSoftware.CompareNetObjects;
 using Moq;
 using StockAnalyzer.Core.StockAggregate;
-using StockAnalyzer.Infrastructure.Scrape.Data;
-using StockAnalyzer.Infrastructure.Scrape.Mapping;
+using StockAnalyzer.Infrastructure.Scrape.RawData;
+using StockAnalyzer.Infrastructure.Scrape.StockAutoMapper;
 using System;
 using Xunit;
 
@@ -21,11 +21,11 @@ namespace StockAnalyzer.IntegrationTests.Mapping
             // Assert
             config.AssertConfigurationIsValid();
         }
-        public static TheoryData<StocksData.Row, Stock> StockData =>
-        new TheoryData<StocksData.Row, Stock>
+        public static TheoryData<TRawData.Row, Stock> StockData =>
+        new TheoryData<TRawData.Row, Stock>
         {
             {
-                new StocksData.Row()
+                new TRawData.Row()
             {
                 CombinedName="06N (06MAGNA)",
                 UpdateTime="2020-12-21T16:14:08+0100"
@@ -38,7 +38,7 @@ namespace StockAnalyzer.IntegrationTests.Mapping
                 }
             },
             {
-                new StocksData.Row()
+                new TRawData.Row()
                 {
                     CombinedName="CDR (CDPROJEKT)",
                     ActualPrice="123"
@@ -54,17 +54,16 @@ namespace StockAnalyzer.IntegrationTests.Mapping
         [Theory]
         [MemberData(nameof(StockData), MemberType = typeof(StockMapProfileTests))]
 
-        public void AutoMapper_Convert_IsValid(StocksData.Row row, Stock expected)
+        public void AutoMapper_Convert_IsValid(TRawData.Row row, Stock expected)
         {
             // Arrange
             var config = new MapperConfiguration(cfg => cfg.AddProfile<StockMapProfile>());
             var mapper = config.CreateMapper();
 
             // Act
-            var result = mapper.Map<StocksData.Row, Stock>(row);
+            var result = mapper.Map<TRawData.Row, Stock>(row);
             CompareLogic compareLogic = new CompareLogic();
             var comparision = compareLogic.Compare(expected, result);
-            var comp2 = compareLogic.Compare(expected.UpdateTime, result.UpdateTime);
 
             // Assert
             Assert.True(comparision.AreEqual);
