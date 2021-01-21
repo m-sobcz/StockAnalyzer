@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using StockAnalyzer.Core.StockAggregate;
-using StockAnalyzer.Infrastructure.Scrape.DataSource;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
+using StockAnalyzer.Infrastructure.Scrape.RepositorySource;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StockAnalyzer.Infrastructure.Scrape.StockAutoMapper
+namespace StockAnalyzer.Infrastructure.Scrape._AutoMapper
 {
     public class StockAutoMapper : IStockMapper
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StockAnalyzer.Infrastructure.Scrape.DataSource
+namespace StockAnalyzer.Infrastructure.Scrape.RepositorySource
 {
     public interface ISerializer<T>
     {

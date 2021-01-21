@@ -7,16 +7,16 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StockAnalyzer.Infrastructure.Scrape.DataSource
+namespace StockAnalyzer.Infrastructure.Scrape.RepositorySource
 {
     public class StockSource : IRepositorySource<Stock>
     {
         readonly IStockMapper mapper;
         readonly StockRawData stockRawData;
-        public StockSource(IStockMapper mapper, StockRawData stockRawData)
+        public StockSource(IStockMapper mapper, IRawDataSource<StockRawData> stockRawDataSource)
         {
             this.mapper = mapper;
-            this.stockRawData = stockRawData;
+            stockRawData = stockRawDataSource.Get();
         }
 
         public IEnumerable<Stock> Get()

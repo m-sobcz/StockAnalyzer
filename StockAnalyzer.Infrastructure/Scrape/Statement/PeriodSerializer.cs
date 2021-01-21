@@ -1,5 +1,5 @@
 ﻿using StockAnalyzer.Core.StatementAggregate;
-using StockAnalyzer.Infrastructure.Scrape.DataSource;
+using StockAnalyzer.Infrastructure.Scrape.RepositorySource;
 using System;
 using System.Collections.Generic;
 using System.Text;

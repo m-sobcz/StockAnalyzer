@@ -1,15 +1,15 @@
-﻿using StockAnalyzer.Infrastructure.Scrape.Scraper;
+﻿using StockAnalyzer.Infrastructure.Scrape.Deserializer;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 
-namespace StockAnalyzer.Infrastructure.Scrape.OpenScrapingDataExtractor
+namespace StockAnalyzer.Infrastructure.Scrape._OpenScraping
 {
     public class ConfigRepository
     {
-        readonly static string defaultConfigPath = Path.Combine("Scrape", "Config");
+        readonly static string defaultConfigPath = Path.Combine("Scrape", "_OpenScraping");
         readonly static string jsonExtension = ".json";
         readonly Dictionary<string, string> files = new Dictionary<string, string>();
         public IReadOnlyCollection<string> Names() => files.Keys.ToList().AsReadOnly();

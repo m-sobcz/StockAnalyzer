@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StockAnalyzer.Infrastructure.Scrape.Scraper
+namespace StockAnalyzer.Infrastructure.Scrape.Deserializer
 {
-    public interface  IDataExtractor<TRawData>  where TRawData : IRawData
+    public interface IDataExtractor<TRawData> where TRawData : IRawData
     {
 
         TRawData Extract(string html);

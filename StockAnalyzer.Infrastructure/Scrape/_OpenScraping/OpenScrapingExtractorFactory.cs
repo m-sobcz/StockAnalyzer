@@ -1,12 +1,12 @@
 ﻿using OpenScraping;
 using OpenScraping.Config;
+using StockAnalyzer.Infrastructure.Scrape.Deserializer;
 using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
-using StockAnalyzer.Infrastructure.Scrape.Scraper;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StockAnalyzer.Infrastructure.Scrape.OpenScrapingDataExtractor
+namespace StockAnalyzer.Infrastructure.Scrape._OpenScraping
 {
     public class OpenScrapingExtractorFactory<TRawData> : IDataExtractorFactory<TRawData> where TRawData : IRawData
     {

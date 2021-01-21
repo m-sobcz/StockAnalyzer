@@ -2,16 +2,30 @@ using AutoMapper;
 using KellermanSoftware.CompareNetObjects;
 using Moq;
 using StockAnalyzer.Core.StockAggregate;
+using StockAnalyzer.Infrastructure.Scrape._AutoMapper;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
-using StockAnalyzer.Infrastructure.Scrape.StockAutoMapper;
 using System;
 using Xunit;
 
-namespace StockAnalyzer.IntegrationTests.Mapping
+namespace StockAnalyzer.UnitTests.Scrape.StockMapper
 {
     public class StockMapProfileTests
     {
+        private MockRepository mockRepository;
 
+
+
+        public StockMapProfileTests()
+        {
+            mockRepository = new MockRepository(MockBehavior.Strict);
+
+
+        }
+
+        private StockMapProfile CreateStockMapProfile()
+        {
+            return new StockMapProfile();
+        }
         [Fact]
         public void AutoMapper_Configuration_IsValid()
         {
@@ -21,11 +35,12 @@ namespace StockAnalyzer.IntegrationTests.Mapping
             // Assert
             config.AssertConfigurationIsValid();
         }
-        public static TheoryData<TRawData.Row, Stock> StockData =>
-        new TheoryData<TRawData.Row, Stock>
+
+        public static TheoryData<StockRawData.Row, Stock> StockData =>
+        new TheoryData<StockRawData.Row, Stock>
         {
             {
-                new TRawData.Row()
+                new StockRawData.Row()
             {
                 CombinedName="06N (06MAGNA)",
                 UpdateTime="2020-12-21T16:14:08+0100"
@@ -38,7 +53,7 @@ namespace StockAnalyzer.IntegrationTests.Mapping
                 }
             },
             {
-                new TRawData.Row()
+                new StockRawData.Row()
                 {
                     CombinedName="CDR (CDPROJEKT)",
                     ActualPrice="123"
@@ -54,20 +69,19 @@ namespace StockAnalyzer.IntegrationTests.Mapping
         [Theory]
         [MemberData(nameof(StockData), MemberType = typeof(StockMapProfileTests))]
 
-        public void AutoMapper_Convert_IsValid(TRawData.Row row, Stock expected)
+        public void AutoMapper_Convert_IsValid(StockRawData.Row row, Stock expected)
         {
             // Arrange
             var config = new MapperConfiguration(cfg => cfg.AddProfile<StockMapProfile>());
             var mapper = config.CreateMapper();
 
             // Act
-            var result = mapper.Map<TRawData.Row, Stock>(row);
-            CompareLogic compareLogic = new CompareLogic();
-            var comparision = compareLogic.Compare(expected, result);
+            var result = mapper.Map<StockRawData.Row, Stock>(row);
 
             // Assert
+            CompareLogic compareLogic = new CompareLogic();
+            var comparision = compareLogic.Compare(expected, result);
             Assert.True(comparision.AreEqual);
         }
-
     }
 }

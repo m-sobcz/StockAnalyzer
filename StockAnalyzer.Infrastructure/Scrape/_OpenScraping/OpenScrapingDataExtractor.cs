@@ -1,15 +1,15 @@
 ﻿using Newtonsoft.Json.Linq;
 using OpenScraping;
 using OpenScraping.Config;
+using StockAnalyzer.Infrastructure.Scrape.Deserializer;
 using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
-using StockAnalyzer.Infrastructure.Scrape.Scraper;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StockAnalyzer.Infrastructure.Scrape.OpenScrapingDataExtractor
+namespace StockAnalyzer.Infrastructure.Scrape._OpenScraping
 {
-    class OpenScrapingDataExtractor<TRawData> : IDataExtractor<TRawData> where TRawData : IRawData
+    public class OpenScrapingDataExtractor<TRawData> : IDataExtractor<TRawData> where TRawData : IRawData
     {
         readonly StructuredDataExtractor dataExtractor;
         public OpenScrapingDataExtractor(StructuredDataExtractor dataExtractor)
@@ -18,7 +18,7 @@ namespace StockAnalyzer.Infrastructure.Scrape.OpenScrapingDataExtractor
         }
         public TRawData Extract(string html)
         {
-            var extractedData= dataExtractor.Extract(html);
+            var extractedData = dataExtractor.Extract(html);
             var rawData = extractedData.ToObject<TRawData>();
             return rawData;
         }

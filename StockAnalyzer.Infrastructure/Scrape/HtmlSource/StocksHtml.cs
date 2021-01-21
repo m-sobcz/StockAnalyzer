@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StockAnalyzer.Infrastructure.Scrape.Web
+namespace StockAnalyzer.Infrastructure.Scrape.HtmlSource
 {
     class StocksHtml : HtmlWebClient, IHtmlSource
     {
@@ -11,6 +11,6 @@ namespace StockAnalyzer.Infrastructure.Scrape.Web
         {
             return GetHtmlFromAdress("https://www.biznesradar.pl/gielda/akcje_gpw");
         }
-        
+
     }
 }

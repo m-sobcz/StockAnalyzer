@@ -1,21 +1,21 @@
-﻿using StockAnalyzer.Infrastructure.Scrape.DataSource;
-using StockAnalyzer.Infrastructure.Scrape.RawData;
+﻿using StockAnalyzer.Infrastructure.Scrape.RawData;
+using StockAnalyzer.Infrastructure.Scrape.RepositorySource;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace StockAnalyzer.Infrastructure.Scrape.RawDataSource
 {
-    public class RawDataSource : IRawDataSource<StockRawData>
+    public class HtmlDataSource<TRawData> : IRawDataSource<TRawData> where TRawData:IRawData
     {
-        readonly IDeserializer<StockRawData> deserializer;
+        readonly IDeserializer<TRawData> deserializer;
         readonly IHtmlSource htmlSource;
-        public RawDataSource(IDeserializer<StockRawData> deserializer, IHtmlSource htmlSource)
+        public HtmlDataSource(IDeserializer<TRawData> deserializer, IHtmlSource htmlSource)
         {
             this.deserializer = deserializer;
             this.htmlSource = htmlSource;
         }
-        public StockRawData Get()
+        public TRawData Get()
         {
             string html = htmlSource.GetHtml();
             var rawData = deserializer.Deserialize(html);

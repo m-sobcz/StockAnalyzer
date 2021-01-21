@@ -1,9 +1,8 @@
 ﻿using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
-using StockAnalyzer.Infrastructure.Scrape.Scraper;
 using System;
 using System.Net;
 
-namespace StockAnalyzer.Infrastructure.Scrape
+namespace StockAnalyzer.Infrastructure.Scrape.Deserializer
 {
     public class Scraper<TRawData> : IDeserializer<TRawData> where TRawData : IRawData
     {
@@ -18,13 +17,12 @@ namespace StockAnalyzer.Infrastructure.Scrape
         {
             this.dataExtractor = dataExtractor;
         }
-        
+
         public TRawData Deserialize(string html)
         {
-            //JContainer container = GetScrapingResult();
             TRawData scrapedObject = dataExtractor.Extract(html);
             return scrapedObject;
-        }       
+        }
 
     }
 }

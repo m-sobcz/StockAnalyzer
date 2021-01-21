@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace StockAnalyzer.Infrastructure.Scrape.Web
+namespace StockAnalyzer.Infrastructure.Scrape.HtmlSource
 {
     public class HtmlWebClient
     {

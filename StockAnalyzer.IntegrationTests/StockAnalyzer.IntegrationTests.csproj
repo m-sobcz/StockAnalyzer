@@ -7,6 +7,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Scrape\**" />
+    <EmbeddedResource Remove="Scrape\**" />
+    <None Remove="Scrape\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Scrape\AutoMapper\StockMapProfileTests.cs" />
+    <Compile Include="Scrape\OpenScraping\ExtractingStockAndFinance.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Scrape\TestData\BHW_balance.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scrape\TestData\BHW_cashflow.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scrape\TestData\BHW_income.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scrape\TestData\GPW_stocks.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CompareNETObjects" Version="4.67.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="Moq" Version="4.15.2" />
@@ -17,21 +43,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StockAnalyzer.Infrastructure\StockAnalyzer.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="TestData\BHW_balance.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="TestData\BHW_cashflow.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="TestData\BHW_income.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="TestData\GPW_stocks.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

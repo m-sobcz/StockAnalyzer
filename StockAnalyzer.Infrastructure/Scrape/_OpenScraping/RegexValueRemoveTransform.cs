@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace StockAnalyzer.Infrastructure.Scrape.OpenScrapingDataExtractor
+namespace StockAnalyzer.Infrastructure.Scrape._OpenScraping
 {
     class RegexValueRemoveTransform : ITransformationFromHtml
     {
