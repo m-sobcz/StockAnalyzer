@@ -12,7 +12,7 @@ using StockAnalyzer.Infrastructure.Scrape.RawData;
 using StockAnalyzer.Infrastructure.Scrape.Deserializer;
 using StockAnalyzer.Core.StockAggregate;
 using OpenScraping;
-using StockAnalyzer.Infrastructure.Scrape._OpenScraping;
+using StockAnalyzer.Infrastructure.Scrape.RawDataExtracting;
 
 namespace StockAnalyzer.IntegrationTests.Scrape
 {

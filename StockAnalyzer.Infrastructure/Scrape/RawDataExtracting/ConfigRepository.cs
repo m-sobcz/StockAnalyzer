@@ -5,11 +5,11 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 
-namespace StockAnalyzer.Infrastructure.Scrape._OpenScraping
+namespace StockAnalyzer.Infrastructure.Scrape.RawDataExtracting
 {
     public class ConfigRepository
     {
-        readonly static string defaultConfigPath = Path.Combine("Scrape", "_OpenScraping");
+        readonly static string defaultConfigPath = Path.Combine("Scrape", "RawDataExtracting");
         readonly static string jsonExtension = ".json";
         readonly Dictionary<string, string> files = new Dictionary<string, string>();
         public IReadOnlyCollection<string> Names() => files.Keys.ToList().AsReadOnly();

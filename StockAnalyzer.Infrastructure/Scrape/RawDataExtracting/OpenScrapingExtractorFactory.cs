@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StockAnalyzer.Infrastructure.Scrape._OpenScraping
+namespace StockAnalyzer.Infrastructure.Scrape.RawDataExtracting
 {
     public class OpenScrapingExtractorFactory<TRawData> : IDataExtractorFactory<TRawData> where TRawData : IRawData
     {

@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StockAnalyzer.Infrastructure.Scrape._OpenScraping
+namespace StockAnalyzer.Infrastructure.Scrape.RawDataExtracting
 {
     public class OpenScrapingDataExtractor<TRawData> : IDataExtractor<TRawData> where TRawData : IRawData
     {

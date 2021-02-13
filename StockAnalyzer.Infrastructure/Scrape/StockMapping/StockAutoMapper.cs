@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StockAnalyzer.Infrastructure.Scrape._AutoMapper
+namespace StockAnalyzer.Infrastructure.Scrape.StockMapping
 {
     public class StockAutoMapper : IStockMapper
     {

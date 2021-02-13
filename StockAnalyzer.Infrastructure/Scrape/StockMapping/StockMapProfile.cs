@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 //https://docs.automapper.org/en/stable/Custom-type-converters.html
 //https://stackoverflow.com/questions/14177455/unit-test-the-automapper-profiles
 
-namespace StockAnalyzer.Infrastructure.Scrape._AutoMapper
+namespace StockAnalyzer.Infrastructure.Scrape.StockMapping
 {
     public class StockMapProfile : Profile
     {

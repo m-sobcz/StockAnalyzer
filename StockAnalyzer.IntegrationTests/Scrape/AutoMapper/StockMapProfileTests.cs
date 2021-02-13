@@ -2,8 +2,8 @@ using AutoMapper;
 using KellermanSoftware.CompareNetObjects;
 using Moq;
 using StockAnalyzer.Core.StockAggregate;
-using StockAnalyzer.Infrastructure.Scrape._AutoMapper;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
+using StockAnalyzer.Infrastructure.Scrape.StockMapping;
 using System;
 using Xunit;
 
@@ -11,21 +11,6 @@ namespace StockAnalyzer.UnitTests.Scrape.StockMapper
 {
     public class StockMapProfileTests
     {
-        private MockRepository mockRepository;
-
-
-
-        public StockMapProfileTests()
-        {
-            mockRepository = new MockRepository(MockBehavior.Strict);
-
-
-        }
-
-        private StockMapProfile CreateStockMapProfile()
-        {
-            return new StockMapProfile();
-        }
         [Fact]
         public void AutoMapper_Configuration_IsValid()
         {
