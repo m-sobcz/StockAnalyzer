@@ -11,10 +11,9 @@ namespace StockAnalyzer.Infrastructure.Scrape.StockMapping
     public class StockAutoMapper : IStockMapper
     {
         readonly IMapper mapper;
-        public StockAutoMapper()
+        public StockAutoMapper(IMapper mapper)
         {
-            IConfigurationProvider config = new MapperConfiguration(cfg => cfg.AddProfile<StockMapProfile>());
-            IMapper mapper = config.CreateMapper();
+            this.mapper = mapper;
         }
         public Stock Map(StockRawData.Row rawDataRow)
         {

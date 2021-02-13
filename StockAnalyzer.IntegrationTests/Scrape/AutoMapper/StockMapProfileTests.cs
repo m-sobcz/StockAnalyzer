@@ -15,7 +15,7 @@ namespace StockAnalyzer.UnitTests.Scrape.StockMapper
         public void AutoMapper_Configuration_IsValid()
         {
             // Arrange
-            var config = new MapperConfiguration(cfg => cfg.AddProfile<StockMapProfile>());
+            var config = new MapperConfiguration(cfg => cfg.AddProfile(new StockMapProfile()));
 
             // Assert
             config.AssertConfigurationIsValid();
@@ -57,7 +57,7 @@ namespace StockAnalyzer.UnitTests.Scrape.StockMapper
         public void AutoMapper_Convert_IsValid(StockRawData.Row row, Stock expected)
         {
             // Arrange
-            var config = new MapperConfiguration(cfg => cfg.AddProfile<StockMapProfile>());
+            var config = new MapperConfiguration(cfg => cfg.AddProfile(new StockMapProfile()));
             var mapper = config.CreateMapper();
 
             // Act
