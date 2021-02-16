@@ -1,16 +1,8 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using StockAnalyzer.Core.StatementAggregate;
-using StockAnalyzer.Infrastructure.Scrape;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 using Xunit;
 using System.Linq;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
 using StockAnalyzer.Infrastructure.Scrape.Deserializer;
-using StockAnalyzer.Core.StockAggregate;
 using OpenScraping;
 using StockAnalyzer.Infrastructure.Scrape.RawDataExtracting;
 

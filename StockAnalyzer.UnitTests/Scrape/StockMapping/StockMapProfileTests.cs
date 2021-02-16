@@ -7,10 +7,22 @@ using StockAnalyzer.Infrastructure.Scrape.StockMapping;
 using System;
 using Xunit;
 
-namespace StockAnalyzer.UnitTests.Scrape.StockMapper
+namespace StockAnalyzer.UnitTests.Scrape.StockMapping
 {
     public class StockMapProfileTests
     {
+        private MockRepository mockRepository;
+
+
+
+        public StockMapProfileTests()
+        {
+            this.mockRepository = new MockRepository(MockBehavior.Strict);
+
+
+        }
+
+
         [Fact]
         public void AutoMapper_Configuration_IsValid()
         {
@@ -20,7 +32,6 @@ namespace StockAnalyzer.UnitTests.Scrape.StockMapper
             // Assert
             config.AssertConfigurationIsValid();
         }
-
         public static TheoryData<StockRawData.Row, Stock> StockData =>
         new TheoryData<StockRawData.Row, Stock>
         {
