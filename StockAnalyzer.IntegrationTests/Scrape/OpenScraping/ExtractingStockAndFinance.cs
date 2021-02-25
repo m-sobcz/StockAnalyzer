@@ -16,7 +16,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
         OpenScrapingExtractorFactory<StockRawData> stocksExtractorFactory;
         public ExtractingStockAndFinance()
         {
-            financeExtractorFactory = new OpenScrapingExtractorFactory<FinanceRawData>(configSection => new OpenScrapingDataExtractor<FinanceRawData>(new StructuredDataExtractor(configSection)), configRepo);
+            financeExtractorFactory = new OpenScrapingExtractorFactory<FinanceRawData>(configSection => new OpenScrapingDataExtractor<FinanceRawData>(new StructuredDataExtractor(configSection)),configRepo);
             stocksExtractorFactory = new OpenScrapingExtractorFactory<StockRawData>(configSection => new OpenScrapingDataExtractor<StockRawData>(new StructuredDataExtractor(configSection)), configRepo);
         }
 
@@ -26,7 +26,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             // Arrange
             string htmlPath = Path.Combine(testDataPath, "BHW_income.html");
             string html = File.ReadAllText(htmlPath);
-            var dataScraper = financeExtractorFactory.Create(ScrapeConfig.Income);
+            var dataScraper = financeExtractorFactory.CreateFromName("Income");
 
             // Act
             FinanceRawData scrapedData = dataScraper.Extract(html);
@@ -42,7 +42,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             // Arrange
             string htmlPath = Path.Combine(testDataPath, "BHW_balance.html");
             string html = File.ReadAllText(htmlPath);
-            var dataScraper = financeExtractorFactory.Create(ScrapeConfig.Balance);
+            var dataScraper = financeExtractorFactory.CreateFromName("Balance");
 
             // Act
             FinanceRawData scrapedData = dataScraper.Extract(html);
@@ -59,7 +59,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             // Arrange
             string htmlPath = Path.Combine(testDataPath, "BHW_cashflow.html");
             string html = File.ReadAllText(htmlPath);
-            var dataScraper = financeExtractorFactory.Create(ScrapeConfig.Cashflow);
+            var dataScraper = financeExtractorFactory.CreateFromName("Cashflow");
 
             // Act
             FinanceRawData scrapedData = dataScraper.Extract(html);
@@ -75,7 +75,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             // Arrange
             string htmlPath = Path.Combine(testDataPath, "GPW_stocks.html");
             string html = File.ReadAllText(htmlPath);
-            var dataScraper = stocksExtractorFactory.Create(ScrapeConfig.Stocks);
+            var dataScraper = stocksExtractorFactory.CreateFromName("Stocks");
 
             // Act
             StockRawData scrapedData = dataScraper.Extract(html);

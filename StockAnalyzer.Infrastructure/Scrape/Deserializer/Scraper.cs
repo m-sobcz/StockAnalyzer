@@ -1,4 +1,5 @@
-﻿using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
+﻿using StockAnalyzer.Infrastructure.Scrape.RawData;
+using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
 using System;
 using System.Net;
 
@@ -7,16 +8,20 @@ namespace StockAnalyzer.Infrastructure.Scrape.Deserializer
     public class Scraper<TRawData> : IDeserializer<TRawData> where TRawData : IRawData
     {
         readonly IDataExtractor<TRawData> dataExtractor;
-        protected static IDataExtractor<TRawData> CreateDataExtractor(IDataExtractorFactory<TRawData> factory, ScrapeConfig scrapeConfig)
+        private IDataExtractorFactory<StockRawData> factory;
+        private string config;
+
+        protected static IDataExtractor<TRawData> CreateDataExtractor(IDataExtractorFactory<TRawData> factory, ScraperConfig scrapeConfig)
         {
-            IDataExtractor<TRawData> dataExtractor = factory.Create(scrapeConfig);
+            IDataExtractor<TRawData> dataExtractor = factory.BuildFromConfig(scrapeConfig.ConfigName);
             return dataExtractor;
         }
 
-        public Scraper(IDataExtractor<TRawData> dataExtractor)
+        public Scraper(IDataExtractorFactory<TRawData> factory, ScraperConfig config)
         {
-            this.dataExtractor = dataExtractor;
+            this.dataExtractor = factory.BuildFromConfig(config.ConfigName);
         }
+
 
         public TRawData Deserialize(string html)
         {

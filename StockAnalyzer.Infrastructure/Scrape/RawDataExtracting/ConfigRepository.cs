@@ -27,10 +27,6 @@ namespace StockAnalyzer.Infrastructure.Scrape.RawDataExtracting
                 files.Add(fileName, fileContent);
             }
         }
-        public string GetByConfig(ScrapeConfig config)
-        {
-            return GetByName(config.ToString());
-        }
         public string GetByName(string name)
         {
             bool success = files.TryGetValue(name, out string json);

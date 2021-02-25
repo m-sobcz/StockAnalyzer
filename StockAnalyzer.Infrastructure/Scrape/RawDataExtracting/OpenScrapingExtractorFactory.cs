@@ -17,13 +17,13 @@ namespace StockAnalyzer.Infrastructure.Scrape.RawDataExtracting
             this.configRepository = configRepository;
             this.getDataExtractor = getDataExtractor;
         }
-        public IDataExtractor<TRawData> Create(ScrapeConfig scrapeConfig)
+        public IDataExtractor<TRawData> CreateFromName(string name)
         {
-            string jsonConfig = configRepository.GetByConfig(scrapeConfig);
-            return Create(jsonConfig);
+            string jsonConfig = configRepository.GetByName(name);
+            return BuildFromConfig(jsonConfig);
         }
 
-        public IDataExtractor<TRawData> Create(string jsonConfig)
+        public IDataExtractor<TRawData> BuildFromConfig(string jsonConfig)
         {
             ConfigSection config = StructuredDataConfig.ParseJsonString(jsonConfig);
             IDataExtractor<TRawData> dataExtractor = getDataExtractor(config);
