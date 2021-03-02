@@ -18,9 +18,9 @@ using System.Text;
 
 namespace StockAnalyzer.Infrastructure.Scrape
 {
-    public class ScrapeService
+    public static class ScraperServices
     {
-        public void ConfigureServices(IServiceCollection services)
+        public static void AddScraperServices(this IServiceCollection services)
         {
             //Stock repository
             services.AddSingleton<ConfigRepository>();
