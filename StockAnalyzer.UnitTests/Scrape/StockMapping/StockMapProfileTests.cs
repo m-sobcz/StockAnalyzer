@@ -52,13 +52,13 @@ namespace StockAnalyzer.UnitTests.Scrape.StockMapping
                 new StockRawData.Row()
                 {
                     CombinedName="CDR (CDPROJEKT)",
-                    ActualPrice="123"
+                    ActualPrice="123.0"
                 },
                 new Stock()
                 {
                     Name="CDPROJEKT",
                     Ticker="CDR",
-                    ActualPrice=123
+                    ActualPrice=123.0M
                 }
             }
         };

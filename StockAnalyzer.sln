@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockAnalyzer.IntegrationTe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockAnalyzer.UnitTests", "StockAnalyzer.UnitTests\StockAnalyzer.UnitTests.csproj", "{FDE33FED-563F-4398-8AAC-3A0CAFB01DEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockAnalyzer.Console", "StockAnalyzer.Console\StockAnalyzer.Console.csproj", "{0D7F871E-2961-4007-953F-315DC5885E1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockAnalyzer.Console", "StockAnalyzer.Console\StockAnalyzer.Console.csproj", "{0D7F871E-2961-4007-953F-315DC5885E1B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{21EEBE0C-D5DF-49F5-96A6-7BA46CC16925} = {21EEBE0C-D5DF-49F5-96A6-7BA46CC16925}
+		{3BD5A8D7-2DCC-47A3-AA57-4D6098198107} = {3BD5A8D7-2DCC-47A3-AA57-4D6098198107}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

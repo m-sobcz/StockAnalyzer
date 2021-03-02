@@ -3,6 +3,7 @@ using StockAnalyzer.Core.StockAggregate;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 //https://docs.automapper.org/en/stable/Custom-type-converters.html
@@ -16,6 +17,7 @@ namespace StockAnalyzer.Infrastructure.Scrape.StockMapping
         readonly Regex tickerRegex;
         public StockMapProfile()
         {
+            CreateMap<string, decimal>().ConvertUsing(s => Convert.ToDecimal(s, CultureInfo.InvariantCulture));
             CreateMap<StockRawData.Row, Stock>()
                 .ForMember(domain => domain.Name, config => config.MapFrom(data => GetName(data.CombinedName)))
                 .ForMember(domain => domain.Ticker, config => config.MapFrom(data => GetTicker(data.CombinedName)))

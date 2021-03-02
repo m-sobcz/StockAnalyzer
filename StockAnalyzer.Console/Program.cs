@@ -4,6 +4,9 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using StockAnalyzer.Infrastructure.Scrape;
+using StockAnalyzer.Core.Interfaces;
+using StockAnalyzer.Core.StockAggregate;
 
 namespace StockAnalyzer.Console
 {
@@ -20,6 +23,12 @@ namespace StockAnalyzer.Console
 
             // entry to run app
             await serviceProvider.GetService<App>().Run(args);
+            var x=serviceProvider.GetService<IReadOnlyRepository<long, Stock>>();
+            var t = x.Get(x => x.ActualPrice > 100.0M);
+            foreach (var s in t) 
+            {
+                System.Console.WriteLine(@$"Name: {s.Name}, Actual price: {s.ActualPrice}");
+            }
 
 
         }
@@ -43,6 +52,7 @@ namespace StockAnalyzer.Console
 
             // add services:
             // services.AddTransient<IMyRespository, MyConcreteRepository>();
+            services.AddScraperServices();
 
             // add app
             services.AddTransient<App>();

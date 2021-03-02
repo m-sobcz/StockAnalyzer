@@ -5,6 +5,7 @@ using OpenScraping;
 using StockAnalyzer.Core.Interfaces;
 using StockAnalyzer.Core.StockAggregate;
 using StockAnalyzer.Infrastructure.Scrape.Deserializer;
+using StockAnalyzer.Infrastructure.Scrape.HtmlSource;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
 using StockAnalyzer.Infrastructure.Scrape.RawDataExtracting;
 using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
@@ -36,6 +37,7 @@ namespace StockAnalyzer.Infrastructure.Scrape
                 new StructuredDataExtractor(configSection)),
                 serviceProvider.GetService<ConfigRepository>())
                 );
+            services.AddScoped<IHtmlSource, StocksHtml>();
 
 
 

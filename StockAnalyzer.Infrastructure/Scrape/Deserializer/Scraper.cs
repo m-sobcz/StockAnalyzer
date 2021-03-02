@@ -19,7 +19,7 @@ namespace StockAnalyzer.Infrastructure.Scrape.Deserializer
 
         public Scraper(IDataExtractorFactory<TRawData> factory, ScraperConfig config)
         {
-            this.dataExtractor = factory.BuildFromConfig(config.ConfigName);
+            this.dataExtractor = factory.CreateFromName(config.ConfigName);
         }
 
 
