@@ -1,6 +1,5 @@
 ﻿using StockAnalyzer.Core.StatementAggregate;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
-using StockAnalyzer.Infrastructure.Serialize;
 using System;
 using System.Collections.Generic;
 
@@ -13,7 +12,7 @@ namespace StockAnalyzer.Infrastructure.Scrape
             FinancesWithPeriods<Cashflow> cashflow
             )
         {
-            List<Statement> statements = new List<Statement>();            
+            List<Statement> statements = new List<Statement>();
             int periodsCount = Math.Min(income.Periods.Count, Math.Min(balance.Periods.Count, cashflow.Periods.Count));
             for (int i = 0; i < periodsCount; i++)
             {

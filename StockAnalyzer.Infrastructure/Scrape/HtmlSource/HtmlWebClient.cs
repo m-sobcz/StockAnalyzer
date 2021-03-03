@@ -1,8 +1,4 @@
-﻿using StockAnalyzer.Infrastructure.Scrape.RawData;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
+﻿using System.Net;
 
 namespace StockAnalyzer.Infrastructure.Scrape.HtmlSource
 {

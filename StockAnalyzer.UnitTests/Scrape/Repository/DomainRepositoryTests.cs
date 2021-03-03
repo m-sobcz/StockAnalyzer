@@ -1,14 +1,12 @@
+using FluentAssertions;
 using Moq;
-using StockAnalyzer.Core.Interfaces;
 using StockAnalyzer.Core.StockAggregate;
+using StockAnalyzer.Infrastructure.Scrape.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Xunit;
-using FluentAssertions;
-using StockAnalyzer.Core;
-using StockAnalyzer.Infrastructure.Scrape.Repository;
 
 namespace StockAnalyzer.UnitTests.Scrape.DomainRepository
 {
@@ -58,7 +56,7 @@ namespace StockAnalyzer.UnitTests.Scrape.DomainRepository
         {
             // Arrange
             var repository = this.CreateRepository();
-            Expression<Func<Stock, bool>> filter = (Stock stock)=>stock.ActualPrice<=200;
+            Expression<Func<Stock, bool>> filter = (Stock stock) => stock.ActualPrice <= 200;
 
             // Act
             var result = repository.Get(filter);

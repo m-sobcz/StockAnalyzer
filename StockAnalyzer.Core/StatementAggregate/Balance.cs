@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StockAnalyzer.Core.StatementAggregate
+﻿namespace StockAnalyzer.Core.StatementAggregate
 {
     public class Balance : Finance
     {
@@ -39,5 +35,5 @@ namespace StockAnalyzer.Core.StatementAggregate
         public decimal TotalCapital { get; set; }
         public decimal TotalEquityAndLiabilities { get; set; }
 
-	}
+    }
 }

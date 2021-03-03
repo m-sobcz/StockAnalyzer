@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StockAnalyzer.Core.StatementAggregate
+﻿namespace StockAnalyzer.Core.StatementAggregate
 {
     public class Income : Finance
     {
@@ -27,5 +23,5 @@ namespace StockAnalyzer.Core.StatementAggregate
         public decimal ShareholderNetProfit { get; set; }
         public decimal EBITDA { get; set; }
 
-	}
+    }
 }

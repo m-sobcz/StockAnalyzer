@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StockAnalyzer.Console
+﻿namespace StockAnalyzer.Console
 {
     public class AppSettings
     {

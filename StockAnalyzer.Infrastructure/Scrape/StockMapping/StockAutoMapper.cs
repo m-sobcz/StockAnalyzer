@@ -3,18 +3,16 @@ using StockAnalyzer.Core.StockAggregate;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
 using StockAnalyzer.Infrastructure.Scrape.RepositorySource;
 using StockAnalyzer.Infrastructure.Utility;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace StockAnalyzer.Infrastructure.Scrape.StockMapping
 {
     public class StockAutoMapper : IStockMapper
     {
         readonly IMapper mapper;
-        public StockAutoMapper(IFactory<IMapper> mapperFactory)
+        public StockAutoMapper()
         {
-            this.mapper = mapperFactory.Create();
+            var config = new MapperConfiguration(cfg => cfg.AddProfile<StockMapProfile>());
+            mapper = config.CreateMapper();
         }
         public Stock Map(StockRawData.Row rawDataRow)
         {

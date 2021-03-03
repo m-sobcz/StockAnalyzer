@@ -1,11 +1,8 @@
-﻿using StockAnalyzer.Core;
-using StockAnalyzer.Core.Interfaces;
-using StockAnalyzer.Core.StatementAggregate;
+﻿using StockAnalyzer.Core.StatementAggregate;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
 using StockAnalyzer.Infrastructure.Scrape.Repository;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace StockAnalyzer.Infrastructure.Scrape.RepositorySource
 {

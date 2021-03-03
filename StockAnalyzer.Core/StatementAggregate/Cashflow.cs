@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StockAnalyzer.Core.StatementAggregate
+﻿namespace StockAnalyzer.Core.StatementAggregate
 {
     public class Cashflow : Finance
     {

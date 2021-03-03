@@ -20,7 +20,7 @@
     <None Update="Scrape\RawDataExtracting\Finance.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scrape\RawDataExtracting\Stocks.json">
+    <None Update="Scrape\RawDataExtracting\Stock.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scrape\RawDataExtracting\Cashflow.json">

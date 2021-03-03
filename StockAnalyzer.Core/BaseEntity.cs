@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StockAnalyzer.Core
+﻿namespace StockAnalyzer.Core
 {
     //https://enterprisecraftsmanship.com/posts/entity-base-class/
     public abstract class BaseEntity

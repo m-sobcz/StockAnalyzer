@@ -1,11 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
-using OpenScraping;
-using OpenScraping.Config;
+﻿using OpenScraping;
 using StockAnalyzer.Infrastructure.Scrape.Deserializer;
 using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace StockAnalyzer.Infrastructure.Scrape.RawDataExtracting
 {

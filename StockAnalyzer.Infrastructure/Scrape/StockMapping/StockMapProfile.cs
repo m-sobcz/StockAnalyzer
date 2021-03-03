@@ -2,9 +2,7 @@
 using StockAnalyzer.Core.StockAggregate;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using System.Text.RegularExpressions;
 //https://docs.automapper.org/en/stable/Custom-type-converters.html
 //https://stackoverflow.com/questions/14177455/unit-test-the-automapper-profiles

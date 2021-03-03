@@ -1,8 +1,6 @@
 ﻿using StockAnalyzer.Core.StatementAggregate;
 using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace StockAnalyzer.Infrastructure.Serialize

@@ -3,7 +3,6 @@ using Moq;
 using StockAnalyzer.Core.StockAggregate;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
 using StockAnalyzer.Infrastructure.Scrape.RepositorySource;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -21,7 +20,7 @@ namespace StockAnalyzer.UnitTests.Scrape.DataSource
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
             this.mockStockMapper = this.mockRepository.Create<IStockMapper>();
-            mockStockMapper.Setup(x => x.Map(It.IsAny<StockRawData.Row>())).Returns<StockRawData.Row>(x=>new Stock() { Name=x.CombinedName+"Mod"});
+            mockStockMapper.Setup(x => x.Map(It.IsAny<StockRawData.Row>())).Returns<StockRawData.Row>(x => new Stock() { Name = x.CombinedName + "Mod" });
             this.mockRawDataSource = this.mockRepository.Create<IRawDataSource<StockRawData>>();
             mockRawDataSource.Setup(x => x.Get()).Returns(GetStockRawData());
 

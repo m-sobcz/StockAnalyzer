@@ -2,7 +2,6 @@
 using StockAnalyzer.Infrastructure.Scrape.RawData;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 namespace StockAnalyzer.Infrastructure.Scrape.Mapping

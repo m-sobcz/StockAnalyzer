@@ -1,23 +1,21 @@
-﻿using System.IO;
-using Xunit;
-using System.Linq;
+﻿using OpenScraping;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
-using StockAnalyzer.Infrastructure.Scrape.Deserializer;
-using OpenScraping;
 using StockAnalyzer.Infrastructure.Scrape.RawDataExtracting;
+using System.IO;
+using System.Linq;
+using Xunit;
 
 namespace StockAnalyzer.IntegrationTests.Scrape
 {
     public class ExtractingStockAndFinance
     {
         readonly string testDataPath = "Scrape//TestData";
-        readonly ConfigRepository configRepo = new ConfigRepository();
         OpenScrapingExtractorFactory<FinanceRawData> financeExtractorFactory;
         OpenScrapingExtractorFactory<StockRawData> stocksExtractorFactory;
         public ExtractingStockAndFinance()
         {
-            financeExtractorFactory = new OpenScrapingExtractorFactory<FinanceRawData>(configSection => new OpenScrapingDataExtractor<FinanceRawData>(new StructuredDataExtractor(configSection)),configRepo);
-            stocksExtractorFactory = new OpenScrapingExtractorFactory<StockRawData>(configSection => new OpenScrapingDataExtractor<StockRawData>(new StructuredDataExtractor(configSection)), configRepo);
+            financeExtractorFactory = new OpenScrapingExtractorFactory<FinanceRawData>(configSection => new OpenScrapingDataExtractor<FinanceRawData>(new StructuredDataExtractor(configSection)));
+            stocksExtractorFactory = new OpenScrapingExtractorFactory<StockRawData>(configSection => new OpenScrapingDataExtractor<StockRawData>(new StructuredDataExtractor(configSection)));
         }
 
         [Fact]
@@ -52,7 +50,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             Assert.Equal("CashWithCentralBank", scrapedData.Rows[0].Label);
             Assert.Equal("841114", scrapedData.Rows[0].Vals[0]);
         }
-        
+
         [Fact]
         public void Scrape_GetCashflow_ScrapsCorrect()
         {
@@ -79,7 +77,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
 
             // Act
             StockRawData scrapedData = dataScraper.Extract(html);
-            var firstFilledResult= scrapedData.Rows.First(x => x.CombinedName != null);
+            var firstFilledResult = scrapedData.Rows.First(x => x.CombinedName != null);
 
             // Assert
             Assert.Equal("06N (06MAGNA)", firstFilledResult.CombinedName
@@ -87,7 +85,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             Assert.Equal("https://www.biznesradar.pl/notowania/06N", firstFilledResult.QuotationLink);
             Assert.Equal("1.50", firstFilledResult.ActualPrice);
             Assert.Equal("66494", firstFilledResult.Turnover);
-            Assert.Equal("2020-12-09T17:00:00+0100", firstFilledResult.UpdateTime);    
+            Assert.Equal("2020-12-09T17:00:00+0100", firstFilledResult.UpdateTime);
         }
     }
 }

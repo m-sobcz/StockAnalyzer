@@ -1,10 +1,10 @@
 using FluentAssertions;
 using Moq;
+using StockAnalyzer.Infrastructure.Scrape.Deserializer;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
 using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
 namespace StockAnalyzer.UnitTests.Scrape.RawDataSource
@@ -13,36 +13,37 @@ namespace StockAnalyzer.UnitTests.Scrape.RawDataSource
     {
         private MockRepository mockRepository;
 
-        private Mock<IDeserializer<StockRawData>> mockDeserializer;
+        private Mock<IDataExtractor<StockRawData>> mockDataExtractor;
         private Mock<IHtmlSource> mockHtmlSource;
 
         public HtmlDataSourceTests()
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
 
-            this.mockDeserializer = this.mockRepository.Create<IDeserializer<StockRawData>>();
-            mockDeserializer.Setup(x => x.Deserialize(It.IsAny<string>()))
-                .Returns<string>(x => new StockRawData() { 
+            this.mockDataExtractor = this.mockRepository.Create<IDataExtractor<StockRawData>>();
+            mockDataExtractor.Setup(x => x.Extract(It.IsAny<string>()))
+                .Returns<string>(x => new StockRawData()
+                {
                     Rows = new List<StockRawData.Row>()
                     {
                         new StockRawData.Row { CombinedName = $"{x}Mod" }
                     }
-                }); 
+                });
             this.mockHtmlSource = this.mockRepository.Create<IHtmlSource>();
             mockHtmlSource.Setup(x => x.GetHtml()).Returns("testHtml");
         }
 
-        private HtmlDataSource<StockRawData> CreateHtmlDataExtractor()
+        private HtmlDataSource<StockRawData> CreateHtmlDataSource()
         {
             return new HtmlDataSource<StockRawData>(
-                this.mockDeserializer.Object,
+                this.mockDataExtractor.Object,
                 this.mockHtmlSource.Object);
         }
         [Fact]
         public void Get_GivenTestHtml_ReturnsTestHtmlMod()
         {
             // Arrange
-            var htmlDataExtractor = this.CreateHtmlDataExtractor();
+            var htmlDataExtractor = this.CreateHtmlDataSource();
 
             // Act
             var result = htmlDataExtractor.Get();

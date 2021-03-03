@@ -1,8 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
 
 namespace StockAnalyzer.Infrastructure.Scrape.Deserializer
 {

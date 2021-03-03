@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
 
 namespace StockAnalyzer.Core.StatementAggregate
 {
@@ -35,7 +32,7 @@ namespace StockAnalyzer.Core.StatementAggregate
             }
             else
             {
-                return Quarter??0 - other.Quarter??0;
+                return Quarter ?? 0 - other.Quarter ?? 0;
             }
         }
     }

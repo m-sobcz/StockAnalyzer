@@ -2,7 +2,6 @@
 using OpenScraping.Transformations;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace StockAnalyzer.Infrastructure.Scrape.RawDataExtracting
