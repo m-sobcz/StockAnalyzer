@@ -3,7 +3,6 @@ using Moq;
 using StockAnalyzer.Core.StockAggregate;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
 using StockAnalyzer.Infrastructure.Scrape.StockMapping;
-using StockAnalyzer.Infrastructure.Utility;
 using Xunit;
 using static StockAnalyzer.Infrastructure.Scrape.RawData.StockRawData;
 

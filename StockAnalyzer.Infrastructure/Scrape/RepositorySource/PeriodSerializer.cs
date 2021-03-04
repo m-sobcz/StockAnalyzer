@@ -1,7 +1,6 @@
 ﻿using StockAnalyzer.Core.StatementAggregate;
-using StockAnalyzer.Infrastructure.Scrape.RepositorySource;
 
-namespace StockAnalyzer.Infrastructure.Serialize
+namespace StockAnalyzer.Infrastructure.Scrape.RepositorySource
 {
     public class PeriodSerializer : ISerializer<Period>
     {

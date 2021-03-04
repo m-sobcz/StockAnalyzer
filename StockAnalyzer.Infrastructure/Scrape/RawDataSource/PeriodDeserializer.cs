@@ -1,9 +1,8 @@
 ﻿using StockAnalyzer.Core.StatementAggregate;
-using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
 using System;
 using System.Text.RegularExpressions;
 
-namespace StockAnalyzer.Infrastructure.Serialize
+namespace StockAnalyzer.Infrastructure.Scrape.RawDataSource
 {
     public class PeriodDeserializer : IDeserializer<Period>
     {
@@ -15,26 +14,38 @@ namespace StockAnalyzer.Infrastructure.Serialize
 
         public PeriodDeserializer()
         {
-            string yearWithOptionalQuarterPattern = @"(?<year>\d{4})(/Q)?(?<quarter>\d)?";
+            string yearWithOptionalQuarterPattern = @"(?<year>\d{4})(/Q?<quarter>\d)?";
             periodRegex = new Regex(yearWithOptionalQuarterPattern, RegexOptions.Compiled);
         }
 
         public Period Deserialize(string description)
         {
             Match yearAndQuarterMatch = periodRegex.Match(description);
-            if (!yearAndQuarterMatch.Success)
-            {
-                return null;
-            }
-            if (yearAndQuarterMatch.Groups[yearGroupName].Length > 0)
-            {
-                ExtractYear(yearAndQuarterMatch.Groups[yearGroupName].Value);
-            }
-            if (yearAndQuarterMatch.Groups[quarterGroupName].Length > 0)
-            {
-                ExtractQuarter(yearAndQuarterMatch.Groups[quarterGroupName].Value);
-            }
+            VerifyMatch(yearAndQuarterMatch, description.Length);
+            ExtractPeriod(yearAndQuarterMatch);
             return new Period(periodYear, periodQuarter);
+        }
+        void VerifyMatch(Match match, int expectedMatchLength) 
+        {
+            if (!match.Success)
+            {
+                throw new ArgumentException("No match with yearWithOptionalQuarterPattern!");
+            }
+            if (match.Length < expectedMatchLength)
+            {
+                throw new ArgumentException("Match found is shorter than inputs length!");
+            }
+        }
+        void ExtractPeriod(Match match) 
+        {
+            if (match.Groups[yearGroupName].Length > 0)
+            {
+                ExtractYear(match.Groups[yearGroupName].Value);
+            }
+            if (match.Groups[quarterGroupName].Length > 0)
+            {
+                ExtractQuarter(match.Groups[quarterGroupName].Value);
+            }
         }
         void ExtractYear(string val)
         {

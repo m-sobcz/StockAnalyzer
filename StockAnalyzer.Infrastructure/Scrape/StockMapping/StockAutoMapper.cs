@@ -2,7 +2,6 @@
 using StockAnalyzer.Core.StockAggregate;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
 using StockAnalyzer.Infrastructure.Scrape.RepositorySource;
-using StockAnalyzer.Infrastructure.Utility;
 
 namespace StockAnalyzer.Infrastructure.Scrape.StockMapping
 {

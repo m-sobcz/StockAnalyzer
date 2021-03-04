@@ -8,36 +8,49 @@ namespace StockAnalyzer.Infrastructure.Scrape.RepositorySource
 {
     public class StatementSource : IRepositorySource<Statement>
     {
-        readonly FinancesWithPeriods<Income> income;
-        readonly FinancesWithPeriods<Balance> balance;
-        readonly FinancesWithPeriods<Cashflow> cashflow;
-        readonly ISerializer<Period> periodSerializer;
-        public StatementSource(FinancesWithPeriods<Income> income,
-            FinancesWithPeriods<Balance> balance,
-            FinancesWithPeriods<Cashflow> cashflow,
-            ISerializer<Period> periodSerializer)
+        readonly IFinanceLoader<Income> incomeLoader;
+        readonly IFinanceLoader<Balance> balanceLoader;
+        readonly IFinanceLoader<Cashflow> cashflowLoader;
+        IRawDataSource<IncomeRawData> incomeRawDataSource;
+        IRawDataSource<BalanceRawData> balanceRawDataSource;
+        IRawDataSource<CashflowRawData> cashflowRawDataSource;
+        public StatementSource(IFinanceLoader<Income> incomeLoader,
+            IFinanceLoader<Balance> balanceLoader,
+            IFinanceLoader<Cashflow> cashflowLoader,
+            IRawDataSource<IncomeRawData> incomeRawDataSource,
+            IRawDataSource<BalanceRawData> balanceRawDataSource,
+            IRawDataSource<CashflowRawData> cashflowRawDataSource
+            )
         {
-            this.income = income;
-            this.balance = balance;
-            this.cashflow = cashflow;
-            this.periodSerializer = periodSerializer;
+            this.incomeLoader = incomeLoader;
+            this.balanceLoader = balanceLoader;
+            this.cashflowLoader = cashflowLoader;
+            this.incomeRawDataSource = incomeRawDataSource;
+            this.balanceRawDataSource = balanceRawDataSource;
+            this.cashflowRawDataSource = cashflowRawDataSource;
         }
 
         public IEnumerable<Statement> Get()
         {
+            FinanceRawData incomeRawData =incomeRawDataSource.Get();
+            FinanceRawData balanceRawData = balanceRawDataSource.Get();
+            FinanceRawData cashflowRawData = cashflowRawDataSource.Get();
+            List<Tuple<Income, Period>> incomes = incomeLoader.GenerateFinanceWithPeriods(incomeRawData);
+            List<Tuple<Balance, Period>> balances =balanceLoader.GenerateFinanceWithPeriods(balanceRawData);
+            List<Tuple<Cashflow, Period>> cashflows =cashflowLoader.GenerateFinanceWithPeriods(cashflowRawData);
             List<Statement> statements = new List<Statement>();
-            int periodsCount = Math.Min(income.Periods.Count, Math.Min(balance.Periods.Count, cashflow.Periods.Count));
+            int periodsCount = Math.Min(incomes.Count, Math.Min(balances.Count, cashflows.Count));
             for (int i = 0; i < periodsCount; i++)
             {
-                Period cohesivePeriod = GetCohesivePeriod(income.Periods[i], balance.Periods[i], cashflow.Periods[i]);
+                Period cohesivePeriod = GetCohesivePeriod(incomes[i].Item2, balances[i].Item2, cashflows[i].Item2);
                 if (cohesivePeriod != null)
                 {
                     Statement statement = new Statement()
                     {
                         Period = cohesivePeriod,
-                        Balance = balance.Finances[i],
-                        Cashflow = cashflow.Finances[i],
-                        Income = income.Finances[i]
+                        Balance = balances[i].Item1,
+                        Cashflow = cashflows[i].Item1,
+                        Income = incomes[i].Item1
                     };
                     statements.Add(statement);
                 }

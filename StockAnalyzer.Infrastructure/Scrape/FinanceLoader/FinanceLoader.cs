@@ -1,40 +1,58 @@
 ﻿using StockAnalyzer.Core.StatementAggregate;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
+using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
+using StockAnalyzer.Infrastructure.Scrape.RepositorySource;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
-namespace StockAnalyzer.Infrastructure.Scrape.Mapping
+namespace StockAnalyzer.Infrastructure.Scrape.FinanceLoader
 {
-    public class FinanceLoader<TDomain> : Loader<FinanceRawData.Row, TDomain> where TDomain : Finance
+    public class FinanceLoader<TFinance> : IFinanceLoader<TFinance> where TFinance : Finance, new()
     {
+        readonly Dictionary<string, PropertyInfo> domainProperties;
+        readonly IDeserializer<Period> periodDeserializer;
 
-
-        public FinanceLoader(Func<TDomain> createFinance) : base(createFinance)
+        public FinanceLoader(IDeserializer<Period> periodDeserializer)
         {
+            this.periodDeserializer = periodDeserializer;
+            domainProperties = GetPropertiesToFill(typeof(TFinance));
+        }
+        Dictionary<string, PropertyInfo> GetPropertiesToFill(Type type)
+        {
+            IEnumerable<PropertyInfo> runtimeProperties = type.GetRuntimeProperties();
+            return runtimeProperties.ToDictionary(x => x.Name);
+        }
+        public List<Tuple<TFinance, Period>> GenerateFinanceWithPeriods(FinanceRawData rawData)
+        {
+            List<Tuple<TFinance, Period>> financesWithPeriods = new List<Tuple<TFinance, Period>>();
+            for (int i = 0; i < rawData.Periods.Count; i++)
+            {
+                TFinance domainObj = new TFinance();
+                Period period = periodDeserializer.Deserialize(rawData.Periods[i]);
+                Tuple<TFinance, Period> tuple = new Tuple<TFinance, Period>(domainObj, period);
+                financesWithPeriods.Add(tuple);
+            }
+            foreach (var row in rawData.Rows)
+            {
+                FillFinanceWithData(financesWithPeriods, row);
+            }
+            return financesWithPeriods;
         }
 
-        public override List<TDomain> Load(List<FinanceRawData.Row> dataRows)
+        void FillFinanceWithData(List<Tuple<TFinance, Period>> financesWithPeriods, FinanceRawData.Row row)
         {
-            List<TDomain> finances = CreateDomains(dataRows.Count);
-            foreach (FinanceRawData.Row row in dataRows)
+            if (domainProperties.TryGetValue(row.Label, out PropertyInfo setterMethodInfo))
             {
-                if (domainProperties.TryGetValue(row.Label, out PropertyInfo setterMethodInfo))
+                for (int i = 0; i < (row.Vals?.Count ?? 0); i++)
                 {
-                    SetFinancesWithDataRow(finances, row, setterMethodInfo);
+                    object val = Convert.ChangeType(row.Vals[i], setterMethodInfo.PropertyType);
+                    MethodInfo setter = setterMethodInfo.GetSetMethod();
+                    setter.Invoke(financesWithPeriods[i].Item1, new object[] { val });
                 }
             }
-            return finances;
-        }
 
-        void SetFinancesWithDataRow(List<TDomain> finances, FinanceRawData.Row row, PropertyInfo propertyInfo)
-        {
-            for (int i = 0; i < row.Vals.Count; i++)
-            {
-                object val = Convert.ChangeType(row.Vals[i], propertyInfo.PropertyType);
-                MethodInfo setter = propertyInfo.GetSetMethod();
-                setter.Invoke(finances[i], new object[] { val });
-            }
         }
     }
 }
