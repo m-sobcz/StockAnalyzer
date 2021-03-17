@@ -2,6 +2,6 @@
 {
     public interface IHtmlSource
     {
-        string GetHtml();
+        string GetHtml(string adressSuffix="");
     }
 }

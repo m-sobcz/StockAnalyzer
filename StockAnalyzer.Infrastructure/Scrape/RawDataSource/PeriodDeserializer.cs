@@ -14,12 +14,13 @@ namespace StockAnalyzer.Infrastructure.Scrape.RawDataSource
 
         public PeriodDeserializer()
         {
-            string yearWithOptionalQuarterPattern = @"(?<year>\d{4})(/Q?<quarter>\d)?";
+            string yearWithOptionalQuarterPattern = @"(?<year>\d{4})(/Q)?(?<quarter>\d)?";
             periodRegex = new Regex(yearWithOptionalQuarterPattern, RegexOptions.Compiled);
         }
 
         public Period Deserialize(string description)
         {
+            if (description == "O4K") return null;//TODO include with current year?
             Match yearAndQuarterMatch = periodRegex.Match(description);
             VerifyMatch(yearAndQuarterMatch, description.Length);
             ExtractPeriod(yearAndQuarterMatch);

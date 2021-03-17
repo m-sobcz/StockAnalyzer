@@ -39,12 +39,14 @@ namespace StockAnalyzer.UnitTests.Scrape.StockMapping
                 new StockRawData.Row()
             {
                 CombinedName="06N (06MAGNA)",
-                UpdateTime="2020-12-21T16:14:08+0100"
+                UpdateTime="2020-12-21T16:14:08+0100",
+                QuotationLink="/notowania/06N"
                 },
                 new Stock()
                 {
                     Name="06MAGNA",
                     Ticker="06N",
+                    Link="06N",
                     UpdateTime=new DateTimeOffset(2020,12,21,16,14,8,0,TimeSpan.FromMinutes(60))
                 }
             },
@@ -52,13 +54,15 @@ namespace StockAnalyzer.UnitTests.Scrape.StockMapping
                 new StockRawData.Row()
                 {
                     CombinedName="CDR (CDPROJEKT)",
-                    ActualPrice="123.0"
+                    ActualPrice="123.0",
+                    QuotationLink="/notowania/CD-PROJEKT"
                 },
                 new Stock()
                 {
                     Name="CDPROJEKT",
                     Ticker="CDR",
-                    ActualPrice=123.0M
+                    ActualPrice=123.0M,
+                    Link="CD-PROJEKT"
                 }
             }
         };

@@ -1,6 +1,7 @@
 {
   "rows": {
-    "_xpath": "//tr",
+    "_xpath": "//tr[contains(@class,'soid')]",
+    "_forceArray": true,
     "combinedName": ".//td//a[contains(@class,'wname')]",
     "quotationLink": ".//td//a[contains(@class,'wname')]//@href",
     "updateTime": ".//td//time//@datetime",

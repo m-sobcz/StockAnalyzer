@@ -12,9 +12,9 @@ namespace StockAnalyzer.Infrastructure.Scrape.RawDataSource
             this.extractor = extractor;
             this.htmlSource = htmlSource;
         }
-        public TRawData Get()
+        public TRawData Get(string param="")
         {
-            string html = htmlSource.GetHtml();
+            string html = htmlSource.GetHtml(param);
             var rawData = extractor.Extract(html);
             return rawData;
         }

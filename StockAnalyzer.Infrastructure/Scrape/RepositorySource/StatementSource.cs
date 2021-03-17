@@ -6,14 +6,14 @@ using System.Collections.Generic;
 
 namespace StockAnalyzer.Infrastructure.Scrape.RepositorySource
 {
-    public class StatementSource : IRepositorySource<Statement>
+    public class StatementSource : IStatementSource
     {
         readonly IFinanceLoader<Income> incomeLoader;
         readonly IFinanceLoader<Balance> balanceLoader;
         readonly IFinanceLoader<Cashflow> cashflowLoader;
-        IRawDataSource<IncomeRawData> incomeRawDataSource;
-        IRawDataSource<BalanceRawData> balanceRawDataSource;
-        IRawDataSource<CashflowRawData> cashflowRawDataSource;
+        readonly IRawDataSource<IncomeRawData> incomeRawDataSource;
+        readonly IRawDataSource<BalanceRawData> balanceRawDataSource;
+        readonly IRawDataSource<CashflowRawData> cashflowRawDataSource;
         public StatementSource(IFinanceLoader<Income> incomeLoader,
             IFinanceLoader<Balance> balanceLoader,
             IFinanceLoader<Cashflow> cashflowLoader,
@@ -30,11 +30,11 @@ namespace StockAnalyzer.Infrastructure.Scrape.RepositorySource
             this.cashflowRawDataSource = cashflowRawDataSource;
         }
 
-        public IEnumerable<Statement> Get()
+        public IEnumerable<Statement> Get(string stockLinkSuffix)
         {
-            FinanceRawData incomeRawData =incomeRawDataSource.Get();
-            FinanceRawData balanceRawData = balanceRawDataSource.Get();
-            FinanceRawData cashflowRawData = cashflowRawDataSource.Get();
+            FinanceRawData incomeRawData =incomeRawDataSource.Get(stockLinkSuffix);
+            FinanceRawData balanceRawData = balanceRawDataSource.Get(stockLinkSuffix);
+            FinanceRawData cashflowRawData = cashflowRawDataSource.Get(stockLinkSuffix);
             List<Tuple<Income, Period>> incomes = incomeLoader.GenerateFinanceWithPeriods(incomeRawData);
             List<Tuple<Balance, Period>> balances =balanceLoader.GenerateFinanceWithPeriods(balanceRawData);
             List<Tuple<Cashflow, Period>> cashflows =cashflowLoader.GenerateFinanceWithPeriods(cashflowRawData);

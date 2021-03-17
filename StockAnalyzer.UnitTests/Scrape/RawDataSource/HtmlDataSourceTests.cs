@@ -11,10 +11,10 @@ namespace StockAnalyzer.UnitTests.Scrape.RawDataSource
 {
     public class HtmlDataSourceTests
     {
-        private MockRepository mockRepository;
+        private readonly MockRepository mockRepository;
 
-        private Mock<IDataExtractor<StockRawData>> mockDataExtractor;
-        private Mock<IHtmlSource> mockHtmlSource;
+        private readonly Mock<IDataExtractor<StockRawData>> mockDataExtractor;
+        private readonly Mock<IHtmlSource> mockHtmlSource;
 
         public HtmlDataSourceTests()
         {
@@ -30,7 +30,7 @@ namespace StockAnalyzer.UnitTests.Scrape.RawDataSource
                     }
                 });
             this.mockHtmlSource = this.mockRepository.Create<IHtmlSource>();
-            mockHtmlSource.Setup(x => x.GetHtml()).Returns("testHtml");
+            mockHtmlSource.Setup(x => x.GetHtml("")).Returns("testHtml");
         }
 
         private HtmlDataSource<StockRawData> CreateHtmlDataSource()

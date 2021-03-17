@@ -10,8 +10,8 @@ namespace StockAnalyzer.IntegrationTests.Scrape
     public class ExtractingStockAndFinance
     {
         readonly string testDataPath = "Scrape//TestData";
-        OpenScrapingExtractorFactory<FinanceRawData> financeExtractorFactory;
-        OpenScrapingExtractorFactory<StockRawData> stocksExtractorFactory;
+        readonly OpenScrapingExtractorFactory<FinanceRawData> financeExtractorFactory;
+        readonly OpenScrapingExtractorFactory<StockRawData> stocksExtractorFactory;
         public ExtractingStockAndFinance()
         {
             financeExtractorFactory = new OpenScrapingExtractorFactory<FinanceRawData>(configSection => new OpenScrapingDataExtractor<FinanceRawData>(new StructuredDataExtractor(configSection)));
@@ -73,7 +73,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             // Arrange
             string htmlPath = Path.Combine(testDataPath, "GPW_stocks.html");
             string html = File.ReadAllText(htmlPath);
-            var dataScraper = stocksExtractorFactory.CreateFromName("Stocks");
+            var dataScraper = stocksExtractorFactory.CreateFromName("Stock");
 
             // Act
             StockRawData scrapedData = dataScraper.Extract(html);

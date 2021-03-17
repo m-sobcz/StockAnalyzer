@@ -7,6 +7,7 @@
   },
   "rows": {
     "_xpath": "//tr[contains(@data-field,'Cashflow')]",
+    "_forceArray": true,
     "label": {
       "_xpath": ".//@data-field",
       "_transformations": [
@@ -20,6 +21,7 @@
     "description": ".//td[@class='f']//a",
     "vals": {
       "_xpath": ".//td[contains(@class, 'h')]//span[@class='value']//span//span",
+      "_forceArray": true,
       "_transformations": [
         {
           "_type": "RegexValueRemoveTransform",

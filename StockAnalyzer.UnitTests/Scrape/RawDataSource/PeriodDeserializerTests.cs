@@ -8,7 +8,7 @@ namespace StockAnalyzer.UnitTests.Scrape.RawDataSource
 {
     public class PeriodDeserializerTests
     {
-        private MockRepository mockRepository;
+        private readonly MockRepository mockRepository;
 
 
 

@@ -40,27 +40,27 @@ namespace StockAnalyzer.Infrastructure.Scrape
         }
         static void AddStatementRepository(this IServiceCollection services)
         {
-            services.AddScoped<IReadOnlyRepository<long, Statement>, DomainRepository<Statement>>();
-            services.AddScoped<IRepositorySource<Statement>, StatementSource>();
+            services.AddScoped<IStatementSource, StatementSource>();
             services.AddScoped<IFinanceLoader<Income>, FinanceLoader<Income>>();
             services.AddScoped<IFinanceLoader<Balance>, FinanceLoader<Balance>>();
             services.AddScoped<IFinanceLoader<Cashflow>, FinanceLoader<Cashflow>>();
             services.AddSingleton<IDeserializer<Period>, PeriodDeserializer>();
-            //TODO: Html Downloader with proper adress load
+
+
             services.AddScoped<IRawDataSource<IncomeRawData>, HtmlDataSource<IncomeRawData>>(sp =>
                 new HtmlDataSource<IncomeRawData>(sp.GetService<IDataExtractorFactory<IncomeRawData>>().CreateFromName(nameof(Income)),
-                new HtmlDownloader("https://www.biznesradar.pl/raporty-finansowe-rachunek-zyskow-i-strat/BANK-HANDLOWY"))
+                new HtmlDownloader("https://www.biznesradar.pl/raporty-finansowe-rachunek-zyskow-i-strat/"))
             );
-
             services.AddScoped<IRawDataSource<BalanceRawData>, HtmlDataSource<BalanceRawData>>(sp =>
                 new HtmlDataSource<BalanceRawData>(sp.GetService<IDataExtractorFactory<BalanceRawData>>().CreateFromName(nameof(Balance)),
-                new HtmlDownloader("https://www.biznesradar.pl/raporty-finansowe-bilans/BANK-HANDLOWY"))
+                new HtmlDownloader("https://www.biznesradar.pl/raporty-finansowe-bilans/"))
             );
-
             services.AddScoped<IRawDataSource<CashflowRawData>, HtmlDataSource<CashflowRawData>>(sp =>
                 new HtmlDataSource<CashflowRawData>(sp.GetService<IDataExtractorFactory<CashflowRawData>>().CreateFromName(nameof(Cashflow)),
-                new HtmlDownloader("https://www.biznesradar.pl/raporty-finansowe-przeplywy-pieniezne/BANK-HANDLOWY"))
+                new HtmlDownloader("https://www.biznesradar.pl/raporty-finansowe-przeplywy-pieniezne/"))
             );
+
+
             services.AddScoped<IDataExtractorFactory<IncomeRawData>, OpenScrapingExtractorFactory<IncomeRawData>>(serviceProvider =>
                 new OpenScrapingExtractorFactory<IncomeRawData>(configSection =>
                 new OpenScrapingDataExtractor<IncomeRawData>(
