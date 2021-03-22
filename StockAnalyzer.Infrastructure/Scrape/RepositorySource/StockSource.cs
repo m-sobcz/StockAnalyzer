@@ -4,6 +4,7 @@ using StockAnalyzer.Infrastructure.Scrape.RawData;
 using StockAnalyzer.Infrastructure.Scrape.Repository;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace StockAnalyzer.Infrastructure.Scrape.RepositorySource
 {
@@ -25,9 +26,8 @@ namespace StockAnalyzer.Infrastructure.Scrape.RepositorySource
             var stocks = new List<Stock>();
             foreach (var row in stockRawData.Rows)
             {
-                var stock = mapper.Map(row);
-                Console.WriteLine(@$"Processing {stock.Name}");
-                if (stock.Name != null)
+                var stock = ExtractStock(row);
+                if (stock != null)
                 {
                     LoadStatements(stock);
                     stocks.Add(stock);
@@ -35,7 +35,14 @@ namespace StockAnalyzer.Infrastructure.Scrape.RepositorySource
             }
             return stocks;
         }
-        public void LoadStatements(Stock stock)
+
+        Stock ExtractStock(StockRawData.Row row)
+        {
+            var stock = mapper.Map(row);
+            Debug.WriteLine(@$"Extracting stock {stock.Name}");
+            return stock.Name != null ? stock : null;
+        }
+        void LoadStatements(Stock stock)
         {
             var statements = statementSource.Get(stock.Link);
             stock.SetStatements(statements);
