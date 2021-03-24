@@ -16,7 +16,7 @@ namespace StockAnalyzer.Infrastructure.EntityFramework
             this.dbContext = dbContext;
             this.stockRepository = stockRepository;
         }
-        public void Reload() 
+        public void ReloadAll() 
         {
             dbContext.Stocks.RemoveRange(dbContext.Stocks);
             var data = stockRepository.Get();

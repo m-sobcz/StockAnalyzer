@@ -28,7 +28,7 @@ namespace StockAnalyzer.Console
             await serviceProvider.GetService<App>().Run(args);
             // Stock test !
             var dataSetter = serviceProvider.GetService<DataSetter>();
-            dataSetter.Reload();
+            dataSetter.ReloadAll();
 
 
             var stockRepo = serviceProvider.GetService<IReadOnlyRepository<long, Stock>>();
