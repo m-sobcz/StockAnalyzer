@@ -1,4 +1,4 @@
-﻿namespace StockAnalyzer.Infrastructure.Scrape.RawDataSource
+﻿namespace StockAnalyzer.Infrastructure.Scrape.RawData
 {
     //Raw Data marker
     public interface IRawData

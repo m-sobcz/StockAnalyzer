@@ -2,6 +2,7 @@
 using StockAnalyzer.Core.StockAggregate;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
 using StockAnalyzer.Infrastructure.Scrape.Repository;
+using StockAnalyzer.Infrastructure.Scrape.Utility;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

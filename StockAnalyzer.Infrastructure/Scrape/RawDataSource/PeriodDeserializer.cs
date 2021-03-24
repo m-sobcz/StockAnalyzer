@@ -1,4 +1,5 @@
 ﻿using StockAnalyzer.Core.StatementAggregate;
+using StockAnalyzer.Infrastructure.Scrape.Utility;
 using System;
 using System.Text.RegularExpressions;
 

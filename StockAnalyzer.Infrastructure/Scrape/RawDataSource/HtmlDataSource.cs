@@ -1,5 +1,6 @@
 ﻿using StockAnalyzer.Infrastructure.Scrape.Deserializer;
-using StockAnalyzer.Infrastructure.Scrape.RepositorySource;
+using StockAnalyzer.Infrastructure.Scrape.RawData;
+using StockAnalyzer.Infrastructure.Scrape.Utility;
 
 namespace StockAnalyzer.Infrastructure.Scrape.RawDataSource
 {

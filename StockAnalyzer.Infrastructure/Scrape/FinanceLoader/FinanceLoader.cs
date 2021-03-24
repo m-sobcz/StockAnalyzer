@@ -1,7 +1,7 @@
 ﻿using StockAnalyzer.Core.StatementAggregate;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
-using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
-using StockAnalyzer.Infrastructure.Scrape.RepositorySource;
+using StockAnalyzer.Infrastructure.Scrape.StatementLoad;
+using StockAnalyzer.Infrastructure.Scrape.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,4 @@
-﻿using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
+﻿using StockAnalyzer.Infrastructure.Scrape.RawData;
 
 namespace StockAnalyzer.Infrastructure.Scrape.Deserializer
 {

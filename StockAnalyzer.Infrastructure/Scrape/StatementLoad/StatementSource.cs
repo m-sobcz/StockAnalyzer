@@ -1,11 +1,13 @@
 ﻿using StockAnalyzer.Core.StatementAggregate;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
 using StockAnalyzer.Infrastructure.Scrape.Repository;
+using StockAnalyzer.Infrastructure.Scrape.RepositorySource;
+using StockAnalyzer.Infrastructure.Scrape.Utility;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace StockAnalyzer.Infrastructure.Scrape.RepositorySource
+namespace StockAnalyzer.Infrastructure.Scrape.StatementLoad
 {
     public class StatementSource : IStatementSource
     {
@@ -33,12 +35,12 @@ namespace StockAnalyzer.Infrastructure.Scrape.RepositorySource
 
         public IEnumerable<Statement> Get(string stockLinkSuffix)
         {
-            FinanceRawData incomeRawData =incomeRawDataSource.Get(stockLinkSuffix);
+            FinanceRawData incomeRawData = incomeRawDataSource.Get(stockLinkSuffix);
             FinanceRawData balanceRawData = balanceRawDataSource.Get(stockLinkSuffix);
             FinanceRawData cashflowRawData = cashflowRawDataSource.Get(stockLinkSuffix);
             List<Tuple<Income, Period>> incomes = incomeLoader.GenerateFinanceWithPeriods(incomeRawData);
-            List<Tuple<Balance, Period>> balances =balanceLoader.GenerateFinanceWithPeriods(balanceRawData);
-            List<Tuple<Cashflow, Period>> cashflows =cashflowLoader.GenerateFinanceWithPeriods(cashflowRawData);
+            List<Tuple<Balance, Period>> balances = balanceLoader.GenerateFinanceWithPeriods(balanceRawData);
+            List<Tuple<Cashflow, Period>> cashflows = cashflowLoader.GenerateFinanceWithPeriods(cashflowRawData);
             List<Statement> statements = new List<Statement>();
             int periodsCount = Math.Min(incomes.Count, Math.Min(balances.Count, cashflows.Count));
             for (int i = 0; i < periodsCount; i++)

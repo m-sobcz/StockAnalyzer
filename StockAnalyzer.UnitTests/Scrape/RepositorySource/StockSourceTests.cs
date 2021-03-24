@@ -4,6 +4,7 @@ using StockAnalyzer.Core.StatementAggregate;
 using StockAnalyzer.Core.StockAggregate;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
 using StockAnalyzer.Infrastructure.Scrape.RepositorySource;
+using StockAnalyzer.Infrastructure.Scrape.Utility;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;

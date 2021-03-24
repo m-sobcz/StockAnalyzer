@@ -1,6 +1,6 @@
 ﻿using OpenScraping.Config;
 using StockAnalyzer.Infrastructure.Scrape.Deserializer;
-using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
+using StockAnalyzer.Infrastructure.Scrape.RawData;
 using System;
 using System.Collections.Generic;
 using System.IO;

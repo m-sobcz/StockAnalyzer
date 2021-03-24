@@ -1,4 +1,4 @@
-﻿namespace StockAnalyzer.Infrastructure.Scrape.RawDataSource
+﻿namespace StockAnalyzer.Infrastructure.Scrape.Utility
 {
     public interface IDeserializer<T>
     {

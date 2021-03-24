@@ -1,6 +1,6 @@
 ﻿using OpenScraping;
 using StockAnalyzer.Infrastructure.Scrape.Deserializer;
-using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
+using StockAnalyzer.Infrastructure.Scrape.RawData;
 
 namespace StockAnalyzer.Infrastructure.Scrape.RawDataExtracting
 {

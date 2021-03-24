@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StockAnalyzer.Infrastructure.Scrape.RepositorySource
+namespace StockAnalyzer.Infrastructure.Scrape.StatementLoad
 {
     public interface IFinanceLoader<TFinance> where TFinance : Finance
     {

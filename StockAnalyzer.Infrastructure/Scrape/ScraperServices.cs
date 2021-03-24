@@ -12,7 +12,9 @@ using StockAnalyzer.Infrastructure.Scrape.RawDataExtracting;
 using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
 using StockAnalyzer.Infrastructure.Scrape.Repository;
 using StockAnalyzer.Infrastructure.Scrape.RepositorySource;
+using StockAnalyzer.Infrastructure.Scrape.StatementLoad;
 using StockAnalyzer.Infrastructure.Scrape.StockMapping;
+using StockAnalyzer.Infrastructure.Scrape.Utility;
 
 namespace StockAnalyzer.Infrastructure.Scrape
 {

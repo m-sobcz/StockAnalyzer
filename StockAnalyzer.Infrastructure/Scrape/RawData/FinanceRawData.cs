@@ -1,5 +1,4 @@
-﻿using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace StockAnalyzer.Infrastructure.Scrape.RawData
 {
