@@ -13,9 +13,9 @@ namespace StockAnalyzer.UnitTests.Scrape.DomainRepository
 {
     public class DomainRepositoryTests
     {
-        private MockRepository mockRepository;
+        private readonly MockRepository mockRepository;
 
-        private Mock<IRepositorySource<Stock>> mockRepositorySource;
+        private readonly Mock<IRepositorySource<Stock>> mockRepositorySource;
 
 
         public DomainRepositoryTests()
@@ -33,47 +33,49 @@ namespace StockAnalyzer.UnitTests.Scrape.DomainRepository
         }
         IEnumerable<Stock> GetSampleData()
         {
-            var sampleData = new List<Stock>();
-            sampleData.Add(new Stock(1, "stock1", "s1") { ActualPrice = 100 });
-            sampleData.Add(new Stock(2, "stock2", "s2") { ActualPrice = 200 });
-            sampleData.Add(new Stock(3, "stock3", "s3") { ActualPrice = 300 });
+            var sampleData = new List<Stock>
+            {
+                new Stock(1, "stock1", "s1") { ActualPrice = 100 },
+                new Stock(2, "stock2", "s2") { ActualPrice = 200 },
+                new Stock(3, "stock3", "s3") { ActualPrice = 300 }
+            };
             return sampleData;
         }
         [Fact]
-        public void Get_WithoutFilter_ReturnsCompleteData()
+        public async Task Get_WithoutFilter_ReturnsCompleteDataAsync()
         {
             // Arrange
             var repository = this.CreateRepository();
 
             // Act
-            var result = repository.Get().Result;
+            var result = await repository.Get();
             var expected = GetSampleData();
 
             // Assert
             result.Should().Equal(expected);
         }
         [Fact]
-        public void Get_WithSampleFilter_ReturnsFilteredData()
+        public async Task Get_WithSampleFilter_ReturnsFilteredDataAsync()
         {
             // Arrange
             var repository = this.CreateRepository();
             Expression<Func<Stock, bool>> filter = (Stock stock) => stock.ActualPrice <= 200;
 
             // Act
-            var result = repository.Get(filter).Result;
+            var result = await repository.Get(filter);
             var expected = GetSampleData().Where(filter.Compile());
 
             // Assert
             result.Should().HaveCount(2).And.Equal(expected);
         }
         [Fact]
-        public void Get_GivenID_ReturnsMatch()
+        public async Task Get_GivenID_ReturnsMatchAsync()
         {
             // Arrange
             var repository = this.CreateRepository();
 
             // Act
-            var result = repository.Get(2).Result;
+            var result = await repository.Get(2);
 
             // Assert
             result.Name.Should().Be("stock2");

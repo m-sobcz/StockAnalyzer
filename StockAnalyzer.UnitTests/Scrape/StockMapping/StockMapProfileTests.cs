@@ -11,18 +11,6 @@ namespace StockAnalyzer.UnitTests.Scrape.StockMapping
 {
     public class StockMapProfileTests
     {
-        private MockRepository mockRepository;
-
-
-
-        public StockMapProfileTests()
-        {
-            this.mockRepository = new MockRepository(MockBehavior.Strict);
-
-
-        }
-
-
         [Fact]
         public void AutoMapper_Configuration_IsValid()
         {

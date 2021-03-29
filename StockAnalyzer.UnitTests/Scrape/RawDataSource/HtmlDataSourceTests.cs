@@ -45,14 +45,14 @@ namespace StockAnalyzer.UnitTests.Scrape.RawDataSource
                 this.mockHtmlSource.Object);
         }
         [Fact]
-        public void Get_GivenTestHtml_ReturnsTestHtmlMod()
+        public async Task Get_GivenTestHtml_ReturnsTestHtmlMod()
         {
             // Arrange
             HtmlRawDataSource<StockRawData> htmlDataSource = CreateHtmlDataSource();
 
             // Act
 
-            var result = htmlDataSource.Get().Result;
+            var result = await htmlDataSource.Get();
             // Assert
             result.Rows[0].CombinedName.Should().Be("testHtmlMod");
         }

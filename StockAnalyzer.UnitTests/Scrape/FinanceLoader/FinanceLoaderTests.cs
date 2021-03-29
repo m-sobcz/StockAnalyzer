@@ -12,9 +12,9 @@ namespace StockAnalyzer.UnitTests.Scrape.FinanceLoader
 {
     public class FinanceLoaderTests
     {
-        private MockRepository mockRepository;
+        private readonly MockRepository mockRepository;
 
-        private Mock<IDeserializer<Period>> mockDeserializer;
+        private readonly Mock<IDeserializer<Period>> mockDeserializer;
 
         public FinanceLoaderTests()
         {
@@ -59,7 +59,7 @@ namespace StockAnalyzer.UnitTests.Scrape.FinanceLoader
                 new Tuple<Income, Period>(new Income(){ NetProfit=10,AdministrationCosts=20},new Period(2010))
             };
             CompareLogic compareLogic = new CompareLogic();
-            var comparision = compareLogic.Compare(expected, result);
+            _ = compareLogic.Compare(expected, result);
             this.mockRepository.VerifyAll();
         }
     }

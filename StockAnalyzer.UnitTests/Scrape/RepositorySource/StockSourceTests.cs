@@ -51,14 +51,13 @@ namespace StockAnalyzer.UnitTests.Scrape.DataSource
             return stockRawData;
         }
         [Fact]
-        public void Get_Given3DataRows_MapsInto3Stocks()
+        public async Task Get_Given3DataRows_MapsInto3Stocks()
         {
             // Arrange
             var stockSource = this.CreateStockSource();
 
             // Act
-            var result = stockSource.Get().Result;
-
+            var result = await stockSource.Get();
             // Assert
             List<Stock> expected = new List<Stock>
             {
