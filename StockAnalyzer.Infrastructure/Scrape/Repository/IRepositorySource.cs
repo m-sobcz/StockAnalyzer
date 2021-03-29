@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace StockAnalyzer.Infrastructure.Scrape.Repository
 {
     public interface IRepositorySource<TDomain>
     {
-        IEnumerable<TDomain> Get();
+        Task<IEnumerable<TDomain>> Get();
     }
 }

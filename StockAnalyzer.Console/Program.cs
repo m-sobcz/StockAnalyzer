@@ -28,11 +28,11 @@ namespace StockAnalyzer.Console
             await serviceProvider.GetService<App>().Run(args);
             // Stock test !
             var dataSetter = serviceProvider.GetService<DataSetter>();
-            dataSetter.ReloadAll();
+            await dataSetter.ReloadAll();
 
 
             var stockRepo = serviceProvider.GetService<IReadOnlyRepository<long, Stock>>();
-            var filteredStocks = stockRepo.Get(x => x.ActualPrice > 100.0M);
+            var filteredStocks = await stockRepo.Get(x => x.ActualPrice > 100.0M);
             foreach (var stock in filteredStocks)
             {
                 System.Console.WriteLine(@$"Name: {stock.Name}, Actual price: {stock.ActualPrice}");

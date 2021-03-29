@@ -6,6 +6,7 @@ using StockAnalyzer.Infrastructure.Scrape.Utility;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace StockAnalyzer.Infrastructure.Scrape.RepositorySource
 {
@@ -21,16 +22,16 @@ namespace StockAnalyzer.Infrastructure.Scrape.RepositorySource
             this.stockRawDataSource = stockRawDataSource;
         }
 
-        public IEnumerable<Stock> Get()
+        public async Task<IEnumerable<Stock>> Get()
         {
-            var stockRawData = stockRawDataSource.Get();
+            var stockRawData = await stockRawDataSource.Get();
             var stocks = new List<Stock>();
             foreach (var row in stockRawData.Rows)
             {
                 var stock = ExtractStock(row);
                 if (stock != null)
                 {
-                    LoadStatements(stock);
+                    await LoadStatements(stock);
                     stocks.Add(stock);
                 }
             }
@@ -43,9 +44,9 @@ namespace StockAnalyzer.Infrastructure.Scrape.RepositorySource
             Debug.WriteLine(@$"Extracting stock {stock.Name}");
             return stock.Name != null ? stock : null;
         }
-        void LoadStatements(Stock stock)
+        async Task LoadStatements(Stock stock)
         {
-            var statements = statementSource.Get(stock.Link);
+            var statements = await statementSource.Get(stock.Link);
             stock.SetStatements(statements);
         }
     }

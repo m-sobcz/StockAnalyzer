@@ -27,7 +27,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             var dataScraper = financeExtractorFactory.CreateFromName("Income");
 
             // Act
-            FinanceRawData scrapedData = dataScraper.Extract(html);
+            FinanceRawData scrapedData = dataScraper.Extract(html).Result;
 
             // Assert
             Assert.Equal("2004", scrapedData.Periods[0]);
@@ -43,7 +43,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             var dataScraper = financeExtractorFactory.CreateFromName("Balance");
 
             // Act
-            FinanceRawData scrapedData = dataScraper.Extract(html);
+            FinanceRawData scrapedData = dataScraper.Extract(html).Result;
 
             // Assert
             Assert.Equal("2004", scrapedData.Periods[0]);
@@ -60,7 +60,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             var dataScraper = financeExtractorFactory.CreateFromName("Cashflow");
 
             // Act
-            FinanceRawData scrapedData = dataScraper.Extract(html);
+            FinanceRawData scrapedData = dataScraper.Extract(html).Result;
 
             // Assert
             Assert.Equal("2004", scrapedData.Periods[0]);
@@ -76,7 +76,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             var dataScraper = stocksExtractorFactory.CreateFromName("Stock");
 
             // Act
-            StockRawData scrapedData = dataScraper.Extract(html);
+            StockRawData scrapedData = dataScraper.Extract(html).Result;
             var firstFilledResult = scrapedData.Rows.First(x => x.CombinedName != null);
 
             // Assert

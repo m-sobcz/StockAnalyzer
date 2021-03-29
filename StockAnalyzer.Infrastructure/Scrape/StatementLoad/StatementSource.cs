@@ -6,6 +6,7 @@ using StockAnalyzer.Infrastructure.Scrape.Utility;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace StockAnalyzer.Infrastructure.Scrape.StatementLoad
 {
@@ -33,11 +34,11 @@ namespace StockAnalyzer.Infrastructure.Scrape.StatementLoad
             this.cashflowRawDataSource = cashflowRawDataSource;
         }
 
-        public IEnumerable<Statement> Get(string stockLinkSuffix)
+        public async Task<IEnumerable<Statement>> Get(string stockLinkSuffix)
         {
-            FinanceRawData incomeRawData = incomeRawDataSource.Get(stockLinkSuffix);
-            FinanceRawData balanceRawData = balanceRawDataSource.Get(stockLinkSuffix);
-            FinanceRawData cashflowRawData = cashflowRawDataSource.Get(stockLinkSuffix);
+            FinanceRawData incomeRawData = await incomeRawDataSource.Get(stockLinkSuffix);
+            FinanceRawData balanceRawData = await balanceRawDataSource.Get(stockLinkSuffix);
+            FinanceRawData cashflowRawData = await cashflowRawDataSource.Get(stockLinkSuffix);
             List<Tuple<Income, Period>> incomes = incomeLoader.GenerateFinanceWithPeriods(incomeRawData);
             List<Tuple<Balance, Period>> balances = balanceLoader.GenerateFinanceWithPeriods(balanceRawData);
             List<Tuple<Cashflow, Period>> cashflows = cashflowLoader.GenerateFinanceWithPeriods(cashflowRawData);

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace StockAnalyzer.Infrastructure.Scrape.Repository
 {
@@ -14,16 +15,16 @@ namespace StockAnalyzer.Infrastructure.Scrape.Repository
         {
             this.repositorySource = repositorySource;
         }
-        public IEnumerable<TDomain> Get(Expression<Func<TDomain, bool>> filter = null)
+        public async Task<IEnumerable<TDomain>> Get(Expression<Func<TDomain, bool>> filter = null)
         {
-            var domains = repositorySource.Get();
+            var domains =  await repositorySource.Get();
             var filtered = filter == null ? domains : domains.Where(filter.Compile());
             return filtered;
         }
 
-        public TDomain Get(long id)
+        public async Task<TDomain> Get(long id)
         {
-            var domains = repositorySource.Get();
+            var domains = await repositorySource.Get();
             return domains.Where(x => x.Id == id).FirstOrDefault();
         }
 

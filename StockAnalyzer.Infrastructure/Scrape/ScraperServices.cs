@@ -30,8 +30,8 @@ namespace StockAnalyzer.Infrastructure.Scrape
             services.AddScoped<IReadOnlyRepository<long, Stock>, DomainRepository<Stock>>();
             services.AddScoped<IRepositorySource<Stock>, StockSource>();
             services.AddScoped<IStockMapper, StockAutoMapper>();
-            services.AddScoped<IRawDataSource<StockRawData>, HtmlDataSource<StockRawData>>(sp =>
-            new HtmlDataSource<StockRawData>(sp.GetService<IDataExtractorFactory<StockRawData>>().CreateFromName(nameof(Stock)),
+            services.AddScoped<IRawDataSource<StockRawData>, HtmlRawDataSource<StockRawData>>(sp =>
+            new HtmlRawDataSource<StockRawData>(sp.GetService<IDataExtractorFactory<StockRawData>>().CreateFromName(nameof(Stock)),
             new HtmlDownloader("https://www.biznesradar.pl/gielda/akcje_gpw"))
             );
             services.AddScoped<IDataExtractorFactory<StockRawData>, OpenScrapingExtractorFactory<StockRawData>>(serviceProvider =>
@@ -49,16 +49,16 @@ namespace StockAnalyzer.Infrastructure.Scrape
             services.AddSingleton<IDeserializer<Period>, PeriodDeserializer>();
 
 
-            services.AddScoped<IRawDataSource<IncomeRawData>, HtmlDataSource<IncomeRawData>>(sp =>
-                new HtmlDataSource<IncomeRawData>(sp.GetService<IDataExtractorFactory<IncomeRawData>>().CreateFromName(nameof(Income)),
+            services.AddScoped<IRawDataSource<IncomeRawData>, HtmlRawDataSource<IncomeRawData>>(sp =>
+                new HtmlRawDataSource<IncomeRawData>(sp.GetService<IDataExtractorFactory<IncomeRawData>>().CreateFromName(nameof(Income)),
                 new HtmlDownloader("https://www.biznesradar.pl/raporty-finansowe-rachunek-zyskow-i-strat/"))
             );
-            services.AddScoped<IRawDataSource<BalanceRawData>, HtmlDataSource<BalanceRawData>>(sp =>
-                new HtmlDataSource<BalanceRawData>(sp.GetService<IDataExtractorFactory<BalanceRawData>>().CreateFromName(nameof(Balance)),
+            services.AddScoped<IRawDataSource<BalanceRawData>, HtmlRawDataSource<BalanceRawData>>(sp =>
+                new HtmlRawDataSource<BalanceRawData>(sp.GetService<IDataExtractorFactory<BalanceRawData>>().CreateFromName(nameof(Balance)),
                 new HtmlDownloader("https://www.biznesradar.pl/raporty-finansowe-bilans/"))
             );
-            services.AddScoped<IRawDataSource<CashflowRawData>, HtmlDataSource<CashflowRawData>>(sp =>
-                new HtmlDataSource<CashflowRawData>(sp.GetService<IDataExtractorFactory<CashflowRawData>>().CreateFromName(nameof(Cashflow)),
+            services.AddScoped<IRawDataSource<CashflowRawData>, HtmlRawDataSource<CashflowRawData>>(sp =>
+                new HtmlRawDataSource<CashflowRawData>(sp.GetService<IDataExtractorFactory<CashflowRawData>>().CreateFromName(nameof(Cashflow)),
                 new HtmlDownloader("https://www.biznesradar.pl/raporty-finansowe-przeplywy-pieniezne/"))
             );
 

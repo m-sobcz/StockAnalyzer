@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace StockAnalyzer.UnitTests.Scrape.DomainRepository
@@ -21,7 +22,7 @@ namespace StockAnalyzer.UnitTests.Scrape.DomainRepository
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
             this.mockRepositorySource = this.mockRepository.Create<IRepositorySource<Stock>>();
-            mockRepositorySource.Setup(x => x.Get()).Returns(GetSampleData());
+            mockRepositorySource.Setup(x => x.Get()).Returns(Task.FromResult(GetSampleData()));
         }
 
 
@@ -45,7 +46,7 @@ namespace StockAnalyzer.UnitTests.Scrape.DomainRepository
             var repository = this.CreateRepository();
 
             // Act
-            var result = repository.Get();
+            var result = repository.Get().Result;
             var expected = GetSampleData();
 
             // Assert
@@ -59,7 +60,7 @@ namespace StockAnalyzer.UnitTests.Scrape.DomainRepository
             Expression<Func<Stock, bool>> filter = (Stock stock) => stock.ActualPrice <= 200;
 
             // Act
-            var result = repository.Get(filter);
+            var result = repository.Get(filter).Result;
             var expected = GetSampleData().Where(filter.Compile());
 
             // Assert
@@ -72,7 +73,7 @@ namespace StockAnalyzer.UnitTests.Scrape.DomainRepository
             var repository = this.CreateRepository();
 
             // Act
-            var result = repository.Get(2);
+            var result = repository.Get(2).Result;
 
             // Assert
             result.Name.Should().Be("stock2");

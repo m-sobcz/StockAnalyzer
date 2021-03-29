@@ -1,7 +1,9 @@
-﻿namespace StockAnalyzer.Infrastructure.Scrape.RawDataSource
+﻿using System.Threading.Tasks;
+
+namespace StockAnalyzer.Infrastructure.Scrape.RawDataSource
 {
     public interface IHtmlSource
     {
-        string GetHtml(string adressSuffix="");
+        Task<string> GetHtml(string adressSuffix="");
     }
 }
