@@ -4,6 +4,7 @@ using StockAnalyzer.Infrastructure.Scrape.StatementLoad;
 using StockAnalyzer.Infrastructure.Scrape.Utility;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -51,6 +52,10 @@ namespace StockAnalyzer.Infrastructure.Scrape.FinanceLoader
                     MethodInfo setter = setterMethodInfo.GetSetMethod();
                     setter.Invoke(financesWithPeriods[i].Item1, new object[] { val });
                 }
+            }
+            else
+            {
+                Debug.WriteLine(@$"Unable to load row: {row.Label} due to lack of matching property in finance: {typeof(TFinance)}!");
             }
 
         }
