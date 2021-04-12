@@ -11,7 +11,7 @@ namespace StockAnalyzer.UnitTests.Scrape.StockMapping
     public class StockAutoMapperTests
     {
 
-        private readonly MockRepository mockRepository;
+        private MockRepository mockRepository;
 
 
         public StockAutoMapperTests()

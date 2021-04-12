@@ -5,7 +5,6 @@ using StockAnalyzer.Infrastructure.Scrape.RawData;
 using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace StockAnalyzer.UnitTests.Scrape.RawDataSource
@@ -20,39 +19,35 @@ namespace StockAnalyzer.UnitTests.Scrape.RawDataSource
         public HtmlDataSourceTests()
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
-            Func<string,Task<StockRawData>> extractGenFunc = ExtractSampleDataTask;
+
             this.mockDataExtractor = this.mockRepository.Create<IDataExtractor<StockRawData>>();
-            mockDataExtractor.Setup(x => x.Extract(It.IsAny<string>())).Returns(extractGenFunc);
-            this.mockHtmlSource = this.mockRepository.Create<IHtmlSource>();
-            mockHtmlSource.Setup(x => x.GetHtml(It.IsAny<string>())).Returns(Task.FromResult("testHtml"));
-        }
-        Task<StockRawData> ExtractSampleDataTask(string testPrefix) 
-        {
-            var stockRawData= new StockRawData()
-            {
-                Rows = new List<StockRawData.Row>()
+            mockDataExtractor.Setup(x => x.Extract(It.IsAny<string>()))
+                .Returns<string>(x => new StockRawData()
+                {
+                    Rows = new List<StockRawData.Row>()
                     {
-                        new StockRawData.Row { CombinedName = testPrefix+"Mod" }
+                        new StockRawData.Row { CombinedName = $"{x}Mod" }
                     }
-            };
-            return Task.FromResult(stockRawData);
+                });
+            this.mockHtmlSource = this.mockRepository.Create<IHtmlSource>();
+            mockHtmlSource.Setup(x => x.GetHtml("")).Returns("testHtml");
         }
 
-        private HtmlRawDataSource<StockRawData> CreateHtmlDataSource()
+        private HtmlDataSource<StockRawData> CreateHtmlDataSource()
         {
-            return new HtmlRawDataSource<StockRawData>(
+            return new HtmlDataSource<StockRawData>(
                 this.mockDataExtractor.Object,
                 this.mockHtmlSource.Object);
         }
         [Fact]
-        public async Task Get_GivenTestHtml_ReturnsTestHtmlMod()
+        public void Get_GivenTestHtml_ReturnsTestHtmlMod()
         {
             // Arrange
-            HtmlRawDataSource<StockRawData> htmlDataSource = CreateHtmlDataSource();
+            var htmlDataExtractor = this.CreateHtmlDataSource();
 
             // Act
+            var result = htmlDataExtractor.Get();
 
-            var result = await htmlDataSource.Get();
             // Assert
             result.Rows[0].CombinedName.Should().Be("testHtmlMod");
         }

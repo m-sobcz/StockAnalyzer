@@ -3,7 +3,6 @@ using StockAnalyzer.Infrastructure.Scrape.RawData;
 using StockAnalyzer.Infrastructure.Scrape.RawDataExtracting;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace StockAnalyzer.IntegrationTests.Scrape
@@ -20,7 +19,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
         }
 
         [Fact]
-        public async Task Scrape_GetIncome_ScrapsCorrect()
+        public void Scrape_GetIncome_ScrapsCorrect()
         {
             // Arrange
             string htmlPath = Path.Combine(testDataPath, "BHW_income.html");
@@ -28,7 +27,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             var dataScraper = financeExtractorFactory.CreateFromName("Income");
 
             // Act
-            FinanceRawData scrapedData = await dataScraper.Extract(html);
+            FinanceRawData scrapedData = dataScraper.Extract(html);
 
             // Assert
             Assert.Equal("2004", scrapedData.Periods[0]);
@@ -36,7 +35,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             Assert.Equal("1727312", scrapedData.Rows[0].Vals[0]);
         }
         [Fact]
-        public async Task Scrape_GetBalance_ScrapsCorrect()
+        public void Scrape_GetBalance_ScrapsCorrect()
         {
             // Arrange
             string htmlPath = Path.Combine(testDataPath, "BHW_balance.html");
@@ -44,7 +43,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             var dataScraper = financeExtractorFactory.CreateFromName("Balance");
 
             // Act
-            FinanceRawData scrapedData = await dataScraper.Extract(html);
+            FinanceRawData scrapedData = dataScraper.Extract(html);
 
             // Assert
             Assert.Equal("2004", scrapedData.Periods[0]);
@@ -53,7 +52,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
         }
 
         [Fact]
-        public async Task Scrape_GetCashflow_ScrapsCorrectAsync()
+        public void Scrape_GetCashflow_ScrapsCorrect()
         {
             // Arrange
             string htmlPath = Path.Combine(testDataPath, "BHW_cashflow.html");
@@ -61,7 +60,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             var dataScraper = financeExtractorFactory.CreateFromName("Cashflow");
 
             // Act
-            FinanceRawData scrapedData = await dataScraper.Extract(html);
+            FinanceRawData scrapedData = dataScraper.Extract(html);
 
             // Assert
             Assert.Equal("2004", scrapedData.Periods[0]);
@@ -69,7 +68,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             Assert.Equal("217139", scrapedData.Rows[0].Vals[0]);
         }
         [Fact]
-        public async Task Scrape_GetStockData_ContainsStockNamesAsync()
+        public void Scrape_GetStockData_ContainsStockNames()
         {
             // Arrange
             string htmlPath = Path.Combine(testDataPath, "GPW_stocks.html");
@@ -77,7 +76,7 @@ namespace StockAnalyzer.IntegrationTests.Scrape
             var dataScraper = stocksExtractorFactory.CreateFromName("Stock");
 
             // Act
-            StockRawData scrapedData = await dataScraper.Extract(html);
+            StockRawData scrapedData = dataScraper.Extract(html);
             var firstFilledResult = scrapedData.Rows.First(x => x.CombinedName != null);
 
             // Assert

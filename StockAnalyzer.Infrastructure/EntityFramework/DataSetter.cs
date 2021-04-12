@@ -4,7 +4,6 @@ using StockAnalyzer.Core.StockAggregate;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace StockAnalyzer.Infrastructure.EntityFramework
 {
@@ -17,10 +16,10 @@ namespace StockAnalyzer.Infrastructure.EntityFramework
             this.dbContext = dbContext;
             this.stockRepository = stockRepository;
         }
-        public async Task ReloadAll() 
+        public void ReloadAll() 
         {
             dbContext.Stocks.RemoveRange(dbContext.Stocks);
-            var data = await stockRepository.Get();
+            var data = stockRepository.Get();
             dbContext.Stocks.AddRange(data);
             var rowsChanged=dbContext.SaveChanges();
         }

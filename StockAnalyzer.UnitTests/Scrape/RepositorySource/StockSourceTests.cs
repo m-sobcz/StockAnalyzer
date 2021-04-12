@@ -7,7 +7,6 @@ using StockAnalyzer.Infrastructure.Scrape.RepositorySource;
 using StockAnalyzer.Infrastructure.Scrape.Utility;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace StockAnalyzer.UnitTests.Scrape.DataSource
@@ -26,9 +25,9 @@ namespace StockAnalyzer.UnitTests.Scrape.DataSource
             this.mockStockMapper = this.mockRepository.Create<IStockMapper>();
             mockStockMapper.Setup(x => x.Map(It.IsAny<StockRawData.Row>())).Returns<StockRawData.Row>(x => new Stock() { Name = x.CombinedName + "Mod" });
             this.mockRawDataSource = this.mockRepository.Create<IRawDataSource<StockRawData>>();
-            mockRawDataSource.Setup(x => x.Get(It.IsAny<string>())).Returns(Task.FromResult(GetStockRawData()));
+            mockRawDataSource.Setup(x => x.Get(It.IsAny<string>())).Returns(GetStockRawData());
             this.mockStatementSource = this.mockRepository.Create<IStatementSource>();
-            mockStatementSource.Setup(x => x.Get(It.IsAny<string>())).Returns(Task.FromResult<IEnumerable<Statement>>(new List<Statement>()));
+            mockStatementSource.Setup(x => x.Get(It.IsAny<string>())).Returns(new List<Statement>());
 
         }
 
@@ -51,13 +50,14 @@ namespace StockAnalyzer.UnitTests.Scrape.DataSource
             return stockRawData;
         }
         [Fact]
-        public async Task Get_Given3DataRows_MapsInto3Stocks()
+        public void Get_Given3DataRows_MapsInto3Stocks()
         {
             // Arrange
             var stockSource = this.CreateStockSource();
 
             // Act
-            var result = await stockSource.Get();
+            var result = stockSource.Get();
+
             // Assert
             List<Stock> expected = new List<Stock>
             {

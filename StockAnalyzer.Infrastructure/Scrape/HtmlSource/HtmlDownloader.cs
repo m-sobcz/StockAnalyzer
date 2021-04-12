@@ -2,7 +2,6 @@
 using StockAnalyzer.Infrastructure.Scrape.RawDataSource;
 using System;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace StockAnalyzer.Infrastructure.Scrape.HtmlSource
 {
@@ -13,15 +12,14 @@ namespace StockAnalyzer.Infrastructure.Scrape.HtmlSource
         {
             this.BaseAdress = baseAdress;
         }
-        public async Task<string> GetHtml(string adressSuffix="")
+        public string GetHtml(string adressSuffix="")
         {
             if (BaseAdress is null) throw new InvalidOperationException("Adress is null!");
             using WebClient client = new WebClient();
             string adress = BaseAdress + adressSuffix;
-            string html=await client.DownloadStringTaskAsync(new Uri(adress));
+            string html = client.DownloadString(adress);
             return html;
         }
-
 
     }
 }

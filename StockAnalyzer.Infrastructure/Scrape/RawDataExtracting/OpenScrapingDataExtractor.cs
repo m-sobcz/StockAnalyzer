@@ -1,7 +1,6 @@
 ﻿using OpenScraping;
 using StockAnalyzer.Infrastructure.Scrape.Deserializer;
 using StockAnalyzer.Infrastructure.Scrape.RawData;
-using System.Threading.Tasks;
 
 namespace StockAnalyzer.Infrastructure.Scrape.RawDataExtracting
 {
@@ -12,9 +11,9 @@ namespace StockAnalyzer.Infrastructure.Scrape.RawDataExtracting
         {
             this.dataExtractor = dataExtractor;
         }
-        public async Task<TRawData> Extract(string html)
+        public TRawData Extract(string html)
         {
-            var extractedData = await Task.Run(() => dataExtractor.Extract(html));
+            var extractedData = dataExtractor.Extract(html);
             var rawData = extractedData.ToObject<TRawData>();
             return rawData;
         }
