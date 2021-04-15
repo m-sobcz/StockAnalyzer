@@ -1,0 +1,43 @@
+﻿@page "/stocklist"
+@using StockAnalyzer.Core.Interfaces
+@using StockAnalyzer.Core.StockAggregate
+@inject IRepository<long, Stock> stockRepo
+<h3>Stocks</h3>
+
+@if (stocks == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ticker</th>
+                <th>Name</th>
+                <th>Actual price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var stock in stocks)
+            {
+            <tr>
+                <td>@stock.Ticker</td>
+                <td>@stock.Name</td>
+                <td>@stock.ActualPrice</td>
+            </tr>
+               
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    IEnumerable<Stock> stocks;
+
+    protected override async Task OnInitializedAsync()
+    {
+        stocks = await Task.Run(()=>stockRepo.Get());
+        Console.WriteLine("DONE!");
+    }
+}

@@ -9,8 +9,8 @@ namespace StockAnalyzer.Infrastructure.EntityFramework
 {
     public class DataSetter
     {
-        StocksDbContext dbContext;
-        IReadOnlyRepository<long, Stock> stockRepository;
+        readonly StocksDbContext dbContext;
+        readonly IReadOnlyRepository<long, Stock> stockRepository;
         public DataSetter(StocksDbContext dbContext, IReadOnlyRepository<long, Stock> stockRepository)
         {
             this.dbContext = dbContext;
@@ -21,7 +21,7 @@ namespace StockAnalyzer.Infrastructure.EntityFramework
             dbContext.Stocks.RemoveRange(dbContext.Stocks);
             var data = stockRepository.Get();
             dbContext.Stocks.AddRange(data);
-            var rowsChanged=dbContext.SaveChanges();
+            var _=dbContext.SaveChanges();
         }
     }
 }

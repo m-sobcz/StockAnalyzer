@@ -15,7 +15,7 @@ namespace StockAnalyzer.Console
             _appSettings = appSettings?.Value ?? throw new ArgumentNullException(nameof(appSettings));
         }
 
-        public async Task Run(string[] args)
+        public async Task Run()
         {
             _logger.LogInformation("Starting...");
 
