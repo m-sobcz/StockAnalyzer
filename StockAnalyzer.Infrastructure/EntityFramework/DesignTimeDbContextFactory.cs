@@ -14,7 +14,7 @@ namespace StockAnalyzer.Infrastructure.EntityFramework
         {
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile(@Directory.GetCurrentDirectory() + "/../StockAnalyzer.Console/appsettings.json")
+                .AddJsonFile("appsettings.json", optional: false)
                 .Build();
             var builder = new DbContextOptionsBuilder<StocksDbContext>();
             var connectionString = configuration.GetConnectionString("LocalConnection");

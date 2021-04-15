@@ -58,6 +58,7 @@ namespace StockAnalyzer.Console
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false)
+                //.AddJsonFile(@Directory.GetCurrentDirectory() + "/../StockAnalyzer.Infrastructure/appsettings.json")
                 .AddEnvironmentVariables()
                 .Build();
 
