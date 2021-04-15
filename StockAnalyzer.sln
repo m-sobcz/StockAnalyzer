@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockAnalyzer.Console", "St
 		{3BD5A8D7-2DCC-47A3-AA57-4D6098198107} = {3BD5A8D7-2DCC-47A3-AA57-4D6098198107}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockAnalyzer.Blazor", "StockAnalyzer.Blazor\StockAnalyzer.Blazor.csproj", "{0F472B56-119D-4FB3-BD67-88EA39F850F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{0D7F871E-2961-4007-953F-315DC5885E1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D7F871E-2961-4007-953F-315DC5885E1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D7F871E-2961-4007-953F-315DC5885E1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F472B56-119D-4FB3-BD67-88EA39F850F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F472B56-119D-4FB3-BD67-88EA39F850F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F472B56-119D-4FB3-BD67-88EA39F850F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F472B56-119D-4FB3-BD67-88EA39F850F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
