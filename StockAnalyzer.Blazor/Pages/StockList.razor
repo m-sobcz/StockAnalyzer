@@ -1,7 +1,7 @@
 ﻿@page "/stocklist"
 @using StockAnalyzer.Core.Interfaces
 @using StockAnalyzer.Core.StockAggregate
-@inject IRepository<long, Stock> stockRepo
+@inject IRepository<long, StockAnalyzer.Core.StockAggregate.Stock> stockRepo
 <h3>Stocks</h3>
 
 @if (stocks == null)

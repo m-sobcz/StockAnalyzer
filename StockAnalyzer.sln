@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockAnalyzer.Console", "St
 		{3BD5A8D7-2DCC-47A3-AA57-4D6098198107} = {3BD5A8D7-2DCC-47A3-AA57-4D6098198107}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockAnalyzer.Blazor", "StockAnalyzer.Blazor\StockAnalyzer.Blazor.csproj", "{0F472B56-119D-4FB3-BD67-88EA39F850F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockAnalyzer.Blazor", "StockAnalyzer.Blazor\StockAnalyzer.Blazor.csproj", "{0F472B56-119D-4FB3-BD67-88EA39F850F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
