@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using StockAnalyzer.Blazor.Data;
 using StockAnalyzer.Core.Interfaces;
 using StockAnalyzer.Core.StockAggregate;
 using StockAnalyzer.Infrastructure.EntityFramework;
@@ -33,7 +32,6 @@ namespace StockAnalyzer.Blazor
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
             services.AddTransient<IRepository<long, Stock>, StockRepository>();
             //services.AddTransient<StocksDbContext>();
 

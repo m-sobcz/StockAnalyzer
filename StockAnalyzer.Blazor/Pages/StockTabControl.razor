@@ -1,0 +1,8 @@
+﻿<h3>StockTabControl</h3>
+<CascadingValue Value="this">
+    @ChildContent
+</CascadingValue>
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

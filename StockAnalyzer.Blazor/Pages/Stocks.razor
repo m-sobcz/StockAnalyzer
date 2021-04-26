@@ -38,6 +38,5 @@ else
     protected override async Task OnInitializedAsync()
     {
         stocks = await Task.Run(()=>stockRepo.Get());
-        Console.WriteLine("DONE!");
     }
 }

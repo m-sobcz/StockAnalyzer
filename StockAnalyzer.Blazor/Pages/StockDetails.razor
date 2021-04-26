@@ -1,0 +1,60 @@
+﻿@page "/stock/{Ticker?}/{SubPage?}" //optional route
+@using StockAnalyzer.Core.Interfaces
+@using StockAnalyzer.Core.StockAggregate
+@inject IRepository<long, StockAnalyzer.Core.StockAggregate.Stock> stockRepo
+<h3>Stock</h3>
+@if (isInitialized)
+{
+    @if (stock != null)
+    {
+        <StockTabControl>
+            <StockTabPage Text="Tab 1">
+                <h1>The first tab</h1>
+            </StockTabPage>
+            <StockTabPage Text="Tab 2">
+                <h1>The second tab</h1>
+            </StockTabPage>
+            <StockTabPage Text="Tab 3">
+                <h1>The third tab</h1>
+            </StockTabPage>
+        </StockTabControl>
+        <p>Ticker: @stock.Ticker</p>
+        <p>Volume: @stock.Volume</p>
+    }
+    @if (stock == null && Ticker != null)
+    {
+        <p>Ticker: @Ticker not found ! </p>
+    }
+}
+else
+{
+    <p>Loading...</p>
+}
+
+@code {
+    [Parameter]
+    public string Ticker { get; set; }
+    [Parameter]
+    public string SubPage { get; set; }
+    Stock stock;
+    bool isInitialized = false;
+    protected override async Task OnInitializedAsync()
+    {
+        if (Ticker == null)
+        {
+            isInitialized = true;
+            return;
+        }
+        await Task.Delay(2000);
+        await LoadStock();
+        isInitialized = true;
+    }
+    async Task LoadStock()
+    {
+        stock = await Task.Run(
+            () => stockRepo
+        .Get(x => x.Ticker.Equals(Ticker, StringComparison.InvariantCultureIgnoreCase))
+        .FirstOrDefault()
+        );
+    }
+}
