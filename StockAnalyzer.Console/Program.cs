@@ -25,7 +25,7 @@ namespace StockAnalyzer.Console
             var serviceProvider = services.BuildServiceProvider();
 
             // entry to run app
-            await serviceProvider.GetService<App>().Run(args);
+            await serviceProvider.GetService<App>().Run();
             // Stock test !
             var dataSetter = serviceProvider.GetService<DataSetter>();
             dataSetter.ReloadAll();

@@ -1,8 +1,36 @@
 ﻿<h3>StockTabControl</h3>
+<div class="btn-group" role="group">
+    @foreach (StockTabPage tabPage in Pages)
+    {
+        <button type="button"
+                class="btn @GetButtonClass(tabPage)"
+                @onclick=@( () => ActivatePage(tabPage) )>
+            @tabPage.Text
+        </button>
+    }
+</div>
 <CascadingValue Value="this">
     @ChildContent
 </CascadingValue>
 @code {
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
+    public StockTabPage ActivePage { get; set; }
+    List<StockTabPage> Pages = new List<StockTabPage>();
+    internal void AddPage(StockTabPage tabPage)
+    {
+        Pages.Add(tabPage);
+        if (Pages.Count == 1)
+            ActivePage = tabPage;
+        StateHasChanged();
+    }
+    string GetButtonClass(StockTabPage page)
+    {
+        return page == ActivePage ? "btn-primary" : "btn-secondary";
+    }
+    void ActivatePage(StockTabPage page)
+    {
+        ActivePage = page;
+    }
 }

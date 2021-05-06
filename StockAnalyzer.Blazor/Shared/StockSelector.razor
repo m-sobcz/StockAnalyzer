@@ -1,0 +1,28 @@
+﻿@using StockAnalyzer.Core.Interfaces
+@using StockAnalyzer.Core.StockAggregate
+@inject IRepository<long, StockAnalyzer.Core.StockAggregate.Stock> stockRepo
+
+<h3>StockSelector</h3>
+<div>@stockLabel.Name</div>
+<EditForm Model=@stockLabel>
+    <div class="form-group mb-3">
+        <label for="MyInputSelect">InputSelect</label>
+        <InputSelect @bind-Value=stockLabel.Name id="MyInputSelect" class="form-control">
+            <option value="Pending">Pending</option>
+            <option value="Active">Active</option>
+            <option value="Suspended">Suspended</option>
+        </InputSelect>
+    </div>
+</EditForm>
+
+@code {
+    public string SelectedStockName { get; set; }
+    StockLabel stockLabel = new StockLabel();
+    IEnumerable<Stock> stocks;
+
+    class StockLabel
+    {
+        public string Name { get; set; }
+        public string Ticker { get; set; }
+    }
+}

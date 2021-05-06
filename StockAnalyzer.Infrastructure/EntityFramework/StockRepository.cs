@@ -31,6 +31,8 @@ namespace StockAnalyzer.Infrastructure.EntityFramework
 
         public IEnumerable<Stock> Get(Expression<Func<Stock, bool>> filter = null)
         {
+            //Expression<Func<Stock, Stock>> selector=x=> new Stock{x.Name, x.Ticker};
+            //var queryables = dbContext.Stocks.Select(x => new { x.Ticker });
             var stocks = dbContext.Stocks;
             IEnumerable<Stock> filtered = filter == null ? stocks : stocks.Where(filter.Compile());
             return filtered;

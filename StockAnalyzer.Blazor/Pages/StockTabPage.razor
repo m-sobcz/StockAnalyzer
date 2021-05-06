@@ -1,5 +1,7 @@
-﻿<div>This is a TabPage</div>
-@ChildContent
+﻿@if (Parent.ActivePage == this)
+{
+    @ChildContent
+}
 @code {
     [CascadingParameter]
     private StockTabControl Parent { get; set; }
@@ -7,10 +9,21 @@
     public RenderFragment ChildContent { get; set; }
     [Parameter]
     public string Text { get; set; }
+    [Parameter]
+    public EventCallback<int> OnMultipleOfThree { get; set; }
+    int currentCount = 0;
     protected override void OnInitialized()
     {
         if (Parent == null)
             throw new ArgumentNullException(nameof(Parent), "TabPage must exist within a TabControl");
         base.OnInitialized();
+        Parent.AddPage(this);
     }
+    private async Task IncrementCount()
+    {
+        currentCount++;
+        if (currentCount % 3 == 0)
+            await OnMultipleOfThree.InvokeAsync(currentCount);
+    }
+
 }
